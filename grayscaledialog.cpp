@@ -9,11 +9,6 @@ GrayscaleDialog::GrayscaleDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
 	ui->graphicsView->setScene(&mScene);
 	mPixmapItem = new QGraphicsPixmapItem();
 	mScene.addItem( mPixmapItem );
-/*
-	if( mat.data )
-	{
-		mat.release();
-	}*/
 
 	connect( this,		SIGNAL( sigCommitImage(QImage) ),
 			 parent,	SLOT( updateImage(QImage) ) );
@@ -43,11 +38,10 @@ void GrayscaleDialog::processImage( const QImage &image )
 {
 	qDebug() << image.format();
 	qDebug() << image.bytesPerLine();
-	//if( mImageOriginal.isNull() )
-	//{
-		mImageOriginal = image.copy(0,0,image.width(),image.height());
-		grayscaleAvg( image, ui->hsldGray->value() );
-	//}
+
+	mImageOriginal = image.copy(0,0,image.width(),image.height());
+	grayscaleAvg( image, ui->hsldGray->value() );
+
 
 	mImage = QImage( (const uchar *) mat.data, mat.cols, mat.rows, mat.step, QImage::Format_RGB32);
 	mPixmapItem->setPixmap(QPixmap::fromImage(mImage));

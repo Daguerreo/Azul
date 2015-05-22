@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	mPixmapItem = new QGraphicsPixmapItem();
 	mScene.addItem( mPixmapItem );
 
-
     /*
      * Setup Variables
      */
@@ -42,9 +41,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	connect( this,			SIGNAL( sigPixelInfoDialog(QPixmap, QPointF) ),
 			 mPixelInfoDialog, SLOT( updateClip(QPixmap, QPointF) ) );
 
-	mImageDialog = new GrayscaleDialog( this );
-	connect( this,			SIGNAL( sigImageDialog(QImage) ),
-			 mImageDialog,	SLOT( processImage(QImage) ) );
+	mGrayscaleDIalog = new GrayscaleDialog( this );
+	connect( this,			SIGNAL( sigGrayscaleDialog(QImage) ),
+			 mGrayscaleDIalog,	SLOT( processImage(QImage) ) );
+
+	mContrastDialog = new ContrastDialog( this );
+	connect( this,			SIGNAL( sigContrastDialog(QImage) ),
+			 mContrastDialog,	SLOT( processImage(QImage) ) );
 
 }
 
@@ -145,8 +148,14 @@ void MainWindow::scaleView( const float &factor )
 
 void MainWindow::on_action_Grayscale_triggered()
 {
-	mImageDialog->show();
-	emit( sigImageDialog( mImage ) );
+	mGrayscaleDIalog->show();
+	emit( sigGrayscaleDialog( mImage ) );
 }
 
 
+
+void MainWindow::on_action_Contrast_Brightness_triggered()
+{
+	mContrastDialog->show();
+	emit( sigContrastDialog( mImage ) );
+}

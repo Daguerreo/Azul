@@ -19,16 +19,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     pixelinfodialog.cpp \
     cvisioninterface.cpp \
-    grayscaledialog.cpp
+    grayscaledialog.cpp \
+    contrastdialog.cpp
 
 HEADERS  += mainwindow.h \
     pixelinfodialog.h \
     cvisioninterface.h \
-    grayscaledialog.h
+    grayscaledialog.h \
+    contrastdialog.h
 
 FORMS    += mainwindow.ui \
     pixelinfodialog.ui \
-    grayscaledialog.ui
+    grayscaledialog.ui \
+    contrastdialog.ui
 
 INCLUDEPATH += C:\\opencv\\opencv2410\\build\\include
 

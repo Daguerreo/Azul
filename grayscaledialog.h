@@ -30,10 +30,14 @@ protected slots:
 	void grayscaleMax(const QImage &image);
 	void grayscaleLuma(const QImage &image);
 	void grayscaleDesaturation(const QImage &image);
+
 private slots:
 	void on_buttonBox_accepted();
 	void on_buttonBox_rejected();
 	void on_btnApply_clicked();
+
+signals:
+	void sigCommitImage(const QImage &image);
 
 private:
     Ui::ImageDialog *ui;
@@ -46,8 +50,7 @@ private:
 	void setOptions();
 	int maxRGB(const int &r, int &g, int &b);
 	int minRGB(const int &r, int &g, int &b);
-signals:
-	void sigCommitImage(const QImage &image);
+
 };
 
 #endif // IMAGEDIALOG_H
