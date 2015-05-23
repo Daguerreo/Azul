@@ -34,9 +34,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
      */
 
     mScaleFactor = 1.0;
+
     /*
      * Setup Dialogs
      */
+
 	mPixelInfoDialog = new PixelInfoDialog( this );
 	connect( this,			SIGNAL( sigPixelInfoDialog(QPixmap, QPointF) ),
 			 mPixelInfoDialog, SLOT( updateClip(QPixmap, QPointF) ) );
@@ -49,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	connect( this,			SIGNAL( sigContrastDialog(QImage) ),
 			 mContrastDialog,	SLOT( processImage(QImage) ) );
 
+	mSharpenDialog = new SharpenDialog( this );
+	connect( this,			SIGNAL( sigSharpenDialog(QImage) ),
+			 mSharpenDialog,	SLOT( processImage(QImage) ) );
 }
 
 MainWindow::~MainWindow()
@@ -152,10 +157,14 @@ void MainWindow::on_action_Grayscale_triggered()
 	emit( sigGrayscaleDialog( mImage ) );
 }
 
-
-
 void MainWindow::on_action_Contrast_Brightness_triggered()
 {
 	mContrastDialog->show();
 	emit( sigContrastDialog( mImage ) );
+}
+
+void MainWindow::on_action_Sharpen_triggered()
+{
+	mSharpenDialog->show();
+	emit( sigSharpenDialog( mImage ) );
 }

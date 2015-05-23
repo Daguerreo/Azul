@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include "pixelinfodialog.h"
-#include "windowsettings.h"
 #include "grayscaledialog.h"
 #include "contrastdialog.h"
+#include "sharpendialog.h"
 
 #include <QMainWindow>
 #include <QGraphicsPixmapItem>
@@ -35,6 +35,7 @@ signals:
     void sigPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
 	void sigGrayscaleDialog( const QImage& image );
 	void sigContrastDialog( const QImage& image );
+	void sigSharpenDialog( const QImage& image );
 
 protected slots:
     void resizeEvent( QResizeEvent *event );
@@ -47,17 +48,18 @@ protected:
 
 private slots:
 	void on_action_Open_triggered();
+	void on_action_Save_triggered();
 	void on_action_Pixel_Info_triggered();
 	void on_action_Grayscale_triggered();
-	void on_action_Save_triggered();
-
 	void on_action_Contrast_Brightness_triggered();
+	void on_action_Sharpen_triggered();
 
 private:
     Ui::MainWindow *ui;
     PixelInfoDialog* mPixelInfoDialog;
 	GrayscaleDialog* mGrayscaleDIalog;
 	ContrastDialog* mContrastDialog;
+	SharpenDialog* mSharpenDialog;
 
     QGraphicsPixmapItem* mPixmapItem;
     QGraphicsScene mScene;

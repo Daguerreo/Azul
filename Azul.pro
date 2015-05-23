@@ -18,20 +18,21 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     pixelinfodialog.cpp \
-    cvisioninterface.cpp \
     grayscaledialog.cpp \
-    contrastdialog.cpp
+    contrastdialog.cpp \
+    sharpendialog.cpp
 
 HEADERS  += mainwindow.h \
     pixelinfodialog.h \
-    cvisioninterface.h \
     grayscaledialog.h \
-    contrastdialog.h
+    contrastdialog.h \
+    sharpendialog.h
 
 FORMS    += mainwindow.ui \
     pixelinfodialog.ui \
     grayscaledialog.ui \
-    contrastdialog.ui
+    contrastdialog.ui \
+    sharpendialog.ui
 
 INCLUDEPATH += C:\\opencv\\opencv2410\\build\\include
 

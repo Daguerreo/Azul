@@ -74,7 +74,5 @@ void ContrastDialog::on_btnApply_clicked()
 void ContrastDialog::process( const QImage &image, const double &alpha, const int& beta )
 {
 	cv::Mat tmp(image.height(),image.width(),CV_8UC4,(uchar*)image.bits(),image.bytesPerLine());
-	tmp.copyTo( mat );
-
 	tmp.convertTo( mat, -1, alpha, beta );
 }

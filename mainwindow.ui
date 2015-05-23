@@ -436,11 +436,11 @@
     <item>
      <widget class="QGraphicsView" name="graphicsView">
       <property name="backgroundBrush">
-       <brush brushstyle="NoBrush">
+       <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>66</red>
-         <green>203</green>
-         <blue>240</blue>
+         <red>0</red>
+         <green>170</green>
+         <blue>255</blue>
         </color>
        </brush>
       </property>
@@ -485,6 +485,7 @@
      <string>Filters</string>
     </property>
     <addaction name="action_Grayscale"/>
+    <addaction name="action_Sharpen"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuImage"/>
@@ -551,6 +552,11 @@
   <action name="action_Contrast_Brightness">
    <property name="text">
     <string>Contrast/Brightness</string>
+   </property>
+  </action>
+  <action name="action_Sharpen">
+   <property name="text">
+    <string>Sharpen</string>
    </property>
   </action>
  </widget>

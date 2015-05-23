@@ -1,6 +1,5 @@
 #include "grayscaledialog.h"
 #include "ui_grayscaledialog.h"
-#include "cvisioninterface.h"
 #include <QDebug>
 
 GrayscaleDialog::GrayscaleDialog(QWidget *parent) : QDialog(parent), ui(new Ui::ImageDialog)
@@ -41,7 +40,6 @@ void GrayscaleDialog::processImage( const QImage &image )
 
 	mImageOriginal = image.copy(0,0,image.width(),image.height());
 	grayscaleAvg( image, ui->hsldGray->value() );
-
 
 	mImage = QImage( (const uchar *) mat.data, mat.cols, mat.rows, mat.step, QImage::Format_RGB32);
 	mPixmapItem->setPixmap(QPixmap::fromImage(mImage));

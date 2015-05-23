@@ -25,15 +25,14 @@ public slots:
 
 protected slots:
 	void resizeEvent(QResizeEvent *event);
-
-	void on_buttonBox_rejected();
-	void on_buttonBox_accepted();
-
 	void process(const QImage &image, const double &alpha, const int &beta);
+
 private slots:
 	void on_hsldBright_valueChanged(int value);
 	void on_hsldContrast_valueChanged(int value);
 	void on_btnApply_clicked();
+	void on_buttonBox_rejected();
+	void on_buttonBox_accepted();
 
 signals:
 	void sigCommitImage(const QImage &image);
