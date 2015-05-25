@@ -180,12 +180,15 @@ void MainWindow::on_action_Open_triggered()
         return;
     }
 
+	QElapsedTimer et;
+	et.start();
+
     QImage image(path);
     if( image.isNull() )
         return;
 
 	showImage( image );
-
+	updateStatusBar( image, et.nsecsElapsed());
 }
 
 void MainWindow::on_action_Save_triggered()
@@ -280,4 +283,19 @@ void MainWindow::updateZoomBoxManually( int zoom )
 	{
 		ui->graphicsView->setTransform( QTransform::fromScale( zoom/100.0, zoom/100.0 ) );
 	}
+}
+
+void MainWindow::updateStatusBar(const QImage& image, qint64 elapsedTime)
+{
+	double timeInms = elapsedTime/1000000.0;
+
+	mLoadTime.setText(QString("Load Time: %1 ms")
+				.arg( timeInms, 0, 'f', 2 )
+				);
+	mImageSize.setText(
+				QString("%1 x %2 - %3 bpp")
+				.arg( image.width() )
+				.arg( image.height() )
+				.arg( image.bitPlaneCount() )
+				);
 }

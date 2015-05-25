@@ -52,6 +52,7 @@ protected slots:
 	float getImageScaleFactor();
 	void updateZoomBox();
 	void updateZoomBoxManually(int zoom);
+	void updateStatusBar(const QImage &image, qint64 elapsedTime);
 
 private slots:
 	void on_action_Open_triggered();
