@@ -438,8 +438,8 @@
       <property name="backgroundBrush">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>0</red>
-         <green>170</green>
+         <red>255</red>
+         <green>255</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -462,7 +462,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="action_Open"/>
     <addaction name="action_Save"/>
@@ -472,22 +472,29 @@
    </widget>
    <widget class="QMenu" name="menuImage">
     <property name="title">
-     <string>Image</string>
+     <string>&amp;Image</string>
     </property>
-    <addaction name="action_Zoom_In"/>
-    <addaction name="action_Zoom_Out"/>
-    <addaction name="separator"/>
     <addaction name="action_Pixel_Info"/>
     <addaction name="action_Contrast_Brightness"/>
    </widget>
    <widget class="QMenu" name="menuFilters">
     <property name="title">
-     <string>Filters</string>
+     <string>Fi&amp;lters</string>
     </property>
     <addaction name="action_Grayscale"/>
     <addaction name="action_Sharpen"/>
+    <addaction name="action_Smoothing"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="action_Adapt_Zoom"/>
+    <addaction name="action_Zoom_In"/>
+    <addaction name="action_Zoom_Out"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
    <addaction name="menuImage"/>
    <addaction name="menuFilters"/>
   </widget>
@@ -518,20 +525,20 @@
   </action>
   <action name="action_Save">
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="action_Close">
    <property name="text">
-    <string>Close</string>
+    <string>&amp;Close</string>
    </property>
   </action>
   <action name="action_Grayscale">
    <property name="text">
     <string>Grayscale</string>
-   </property>
-   <property name="shortcut">
-    <string>+</string>
    </property>
   </action>
   <action name="action_Quit">
@@ -543,10 +550,16 @@
    <property name="text">
     <string>Zoom In</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
   </action>
   <action name="action_Zoom_Out">
    <property name="text">
     <string>Zoom Out</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
    </property>
   </action>
   <action name="action_Contrast_Brightness">
@@ -557,6 +570,22 @@
   <action name="action_Sharpen">
    <property name="text">
     <string>Sharpen</string>
+   </property>
+  </action>
+  <action name="action_Smoothing">
+   <property name="text">
+    <string>Smoothing</string>
+   </property>
+  </action>
+  <action name="action_Adapt_Zoom">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Adapt Zoom</string>
    </property>
   </action>
  </widget>

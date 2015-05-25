@@ -14,25 +14,36 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Azul
 TEMPLATE = app
 
+# The application version
+VERSION = 0.1
+
+# Define the preprocessor macro to get the application version in our application.
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     pixelinfodialog.cpp \
     grayscaledialog.cpp \
     contrastdialog.cpp \
-    sharpendialog.cpp
+    sharpendialog.cpp \
+    smoothingdialog.cpp \
+
 
 HEADERS  += mainwindow.h \
     pixelinfodialog.h \
     grayscaledialog.h \
     contrastdialog.h \
-    sharpendialog.h
+    sharpendialog.h \
+    smoothingdialog.h
 
 FORMS    += mainwindow.ui \
     pixelinfodialog.ui \
     grayscaledialog.ui \
     contrastdialog.ui \
-    sharpendialog.ui
+    sharpendialog.ui \
+    basedialog.ui \
+    smoothingdialog.ui
 
 INCLUDEPATH += C:\\opencv\\opencv2410\\build\\include
 

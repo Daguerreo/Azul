@@ -5,6 +5,7 @@
 #include "grayscaledialog.h"
 #include "contrastdialog.h"
 #include "sharpendialog.h"
+#include "smoothingdialog.h"
 
 #include <QMainWindow>
 #include <QGraphicsPixmapItem>
@@ -13,6 +14,7 @@
 #include <QLabel>
 #include <QSpinBox>
 #include <QFileDialog>
+#include <QRubberBand>
 #include <opencv2/core/core.hpp>
 
 
@@ -37,14 +39,19 @@ signals:
 	void sigContrastDialog( const QImage& image );
 	void sigSharpenDialog( const QImage& image );
 
-protected slots:
-    void resizeEvent( QResizeEvent *event );
-    bool eventFilter( QObject *obj, QEvent *ev );
-
-
 protected:
+    void resizeEvent( QResizeEvent *event );
+	bool eventFilter( QObject *obj, QEvent *event );
+	void mousePressEvent(QMouseEvent *event);
+	void mouseMoveEvent(QMouseEvent *event);
+	void mouseReleaseEvent(QMouseEvent *event);
+
+protected slots:
 	void showImage( const QImage& image );
 	void scaleView( const float& factor );
+	float getImageScaleFactor();
+	void updateZoomBox();
+	void updateZoomBoxManually(int zoom);
 
 private slots:
 	void on_action_Open_triggered();
@@ -53,6 +60,10 @@ private slots:
 	void on_action_Grayscale_triggered();
 	void on_action_Contrast_Brightness_triggered();
 	void on_action_Sharpen_triggered();
+	void on_action_Smoothing_triggered();
+	void on_action_Adapt_Zoom_triggered();
+	void on_action_Zoom_Out_triggered();
+	void on_action_Zoom_In_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -60,6 +71,7 @@ private:
 	GrayscaleDialog* mGrayscaleDIalog;
 	ContrastDialog* mContrastDialog;
 	SharpenDialog* mSharpenDialog;
+	SmoothingDialog* mSmoothingDialog;
 
     QGraphicsPixmapItem* mPixmapItem;
     QGraphicsScene mScene;
@@ -68,8 +80,10 @@ private:
     QLabel mImageSize;
     QSpinBox mZoomBox;
 	QImage mImage;
+	QImage mImageInRect;
     float mScaleFactor;
-
+	QRubberBand* mRubberBand;
+	QPoint mypoint;
 
 };
 
