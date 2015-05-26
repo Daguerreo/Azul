@@ -31,13 +31,14 @@ public:
     ~MainWindow();
 
 public slots:
-	void updateImage(const QImage &image );
+	void updateImage(const QImage &image , qint64 time);
 
 signals:
     void sigPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
 	void sigGrayscaleDialog( const QImage& image );
 	void sigContrastDialog( const QImage& image );
 	void sigSharpenDialog( const QImage& image );
+	void sigSmoothingDialog( const QImage& image );
 
 protected:
     void resizeEvent( QResizeEvent *event );
@@ -52,7 +53,7 @@ protected slots:
 	float getImageScaleFactor();
 	void updateZoomBox();
 	void updateZoomBoxManually(int zoom);
-	void updateStatusBar(const QImage &image, qint64 elapsedTime);
+	void updateStatusBar(const QImage &image, const qint64 &elapsedTime);
 
 private slots:
 	void on_action_Open_triggered();
@@ -65,6 +66,9 @@ private slots:
 	void on_action_Adapt_Zoom_triggered();
 	void on_action_Zoom_Out_triggered();
 	void on_action_Zoom_In_triggered();
+	void on_action_About_Qt_triggered();
+
+	void on_action_Lenna_triggered();
 
 private:
     Ui::MainWindow *ui;

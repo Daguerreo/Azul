@@ -27,11 +27,10 @@ protected slots:
 	void sharpen( const QImage &image );
 
 signals:
-	void sigCommitImage(const QImage &image);
+	void sigCommitImage(const QImage &image, const qint64 &time);
 
 private slots:
 	void on_buttonBox_accepted();
-
 	void on_buttonBox_rejected();
 
 private:
@@ -41,6 +40,7 @@ private:
 	cv::Mat mat;
 	QImage mImage;
 	QImage mImageOriginal;
+	qint64 mTime;
 };
 
 #endif // SHARPENDIALOG_H

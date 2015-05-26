@@ -429,7 +429,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Azul</string>
+   <string/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -438,8 +438,8 @@
       <property name="backgroundBrush">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>255</red>
-         <green>255</green>
+         <red>201</red>
+         <green>223</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -457,10 +457,16 @@
      <height>26</height>
     </rect>
    </property>
-   <property name="nativeMenuBar">
+   <property name="autoFillBackground">
     <bool>true</bool>
    </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
    <widget class="QMenu" name="menuFile">
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>&amp;File</string>
     </property>
@@ -474,16 +480,20 @@
     <property name="title">
      <string>&amp;Image</string>
     </property>
-    <addaction name="action_Pixel_Info"/>
     <addaction name="action_Contrast_Brightness"/>
+    <addaction name="action_Pixel_Info"/>
+    <addaction name="actionHistogram"/>
+    <addaction name="actionColor_Histogram"/>
+    <addaction name="actionTransform"/>
    </widget>
    <widget class="QMenu" name="menuFilters">
     <property name="title">
      <string>Fi&amp;lters</string>
     </property>
     <addaction name="action_Grayscale"/>
-    <addaction name="action_Sharpen"/>
+    <addaction name="action_Negative"/>
     <addaction name="action_Smoothing"/>
+    <addaction name="action_Sharpen"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -492,25 +502,65 @@
     <addaction name="action_Adapt_Zoom"/>
     <addaction name="action_Zoom_In"/>
     <addaction name="action_Zoom_Out"/>
+    <addaction name="actionOriginal_Size"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+    <addaction name="action_About_Qt"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuImage"/>
    <addaction name="menuFilters"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftToolBarArea</set>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>60</width>
+     <height>60</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+    <enum>LeftToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_Open"/>
+   <addaction name="action_Save"/>
+   <addaction name="action_Zoom_In"/>
+   <addaction name="action_Zoom_Out"/>
+   <addaction name="action_Lenna"/>
   </widget>
   <action name="action_Open">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/open_folder.png</normaloff>:/res/icon/open_folder.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Open</string>
    </property>
@@ -522,8 +572,15 @@
    <property name="text">
     <string>Pixel Info</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+'</string>
+   </property>
   </action>
   <action name="action_Save">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/save.png</normaloff>:/res/icon/save.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Save</string>
    </property>
@@ -534,6 +591,9 @@
   <action name="action_Close">
    <property name="text">
     <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="action_Grayscale">
@@ -547,6 +607,10 @@
    </property>
   </action>
   <action name="action_Zoom_In">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/zoom_out.png</normaloff>:/res/icon/zoom_out.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom In</string>
    </property>
@@ -555,6 +619,10 @@
    </property>
   </action>
   <action name="action_Zoom_Out">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/zoom_in.png</normaloff>:/res/icon/zoom_in.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom Out</string>
    </property>
@@ -569,12 +637,12 @@
   </action>
   <action name="action_Sharpen">
    <property name="text">
-    <string>Sharpen</string>
+    <string>Sharp</string>
    </property>
   </action>
   <action name="action_Smoothing">
    <property name="text">
-    <string>Smoothing</string>
+    <string>Smooth</string>
    </property>
   </action>
   <action name="action_Adapt_Zoom">
@@ -585,11 +653,63 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Adapt Zoom</string>
+    <string>Fit in View</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="action_About_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="action_Lenna">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/lenna.png</normaloff>:/res/icon/lenna.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lenna</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+L</string>
+   </property>
+  </action>
+  <action name="action_Negative">
+   <property name="text">
+    <string>Negative</string>
+   </property>
+  </action>
+  <action name="actionHistogram">
+   <property name="text">
+    <string>Histogram</string>
+   </property>
+  </action>
+  <action name="actionColor_Histogram">
+   <property name="text">
+    <string>Color Histogram</string>
+   </property>
+  </action>
+  <action name="actionOriginal_Size">
+   <property name="text">
+    <string>Original Size</string>
+   </property>
+  </action>
+  <action name="actionTransform">
+   <property name="text">
+    <string>Transform</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -13,8 +13,8 @@ ContrastDialog::ContrastDialog(QWidget *parent) :
 	mContrast = 1.0;
 	mBrightness = 0;
 
-	connect( this,		SIGNAL( sigCommitImage(QImage) ),
-			 parent,	SLOT( updateImage(QImage) ) );
+	connect( this,		SIGNAL( sigCommitImage(QImage,qint64) ),
+			 parent,	SLOT( updateImage(QImage,qint64) ) );
 }
 
 ContrastDialog::~ContrastDialog()
@@ -38,21 +38,23 @@ void ContrastDialog::processImage( const QImage &image )
 	mScene.setSceneRect(0, 0, mImage.width(), mImage.height());
 }
 
-void ContrastDialog::on_hsldContrast_valueChanged(int value)
+void ContrastDialog::on_hsldContrast_valueChanged( int value )
 {
+	Q_UNUSED( value );
 	mContrast = ((double) ui->hsldContrast->value())/10.0;
 	ui->lblCurrContrast->setNum( mContrast );
 }
 
-void ContrastDialog::on_hsldBright_valueChanged(int value)
+void ContrastDialog::on_hsldBright_valueChanged( int value )
 {
+	Q_UNUSED( value );
 	mBrightness = ui->hsldBright->value();
 	ui->lblCurrBright->setNum( mBrightness );
 }
 
 void ContrastDialog::on_buttonBox_accepted()
 {
-	emit( sigCommitImage( mImage ) );
+	emit( sigCommitImage( mImage, mTime ) );
 
 	ContrastDialog::close();
 }

@@ -13,11 +13,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Azul
 TEMPLATE = app
-
-# The application version
-VERSION = 0.1
-
-# Define the preprocessor macro to get the application version in our application.
+DEFINES += APP_NAME=\\\"Azul\\\"
+VERSION = 0.1.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 

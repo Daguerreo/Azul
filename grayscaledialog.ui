@@ -436,7 +436,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="frame_view">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -491,7 +491,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="frame_command">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -711,12 +711,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>482</x>
-     <y>159</y>
+     <x>547</x>
+     <y>192</y>
     </hint>
     <hint type="destinationlabel">
-     <x>480</x>
-     <y>180</y>
+     <x>547</x>
+     <y>215</y>
     </hint>
    </hints>
   </connection>
@@ -731,8 +731,8 @@
      <y>54</y>
     </hint>
     <hint type="destinationlabel">
-     <x>388</x>
-     <y>123</y>
+     <x>587</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>

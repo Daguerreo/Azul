@@ -9,8 +9,8 @@ GrayscaleDialog::GrayscaleDialog(QWidget *parent) : QDialog(parent), ui(new Ui::
 	mPixmapItem = new QGraphicsPixmapItem();
 	mScene.addItem( mPixmapItem );
 
-	connect( this,		SIGNAL( sigCommitImage(QImage) ),
-			 parent,	SLOT( updateImage(QImage) ) );
+	connect( this,		SIGNAL( sigCommitImage(QImage, qint64) ),
+			 parent,	SLOT( updateImage(QImage,qint64) ) );
 
 	setOptions();
 }
@@ -35,9 +35,6 @@ void GrayscaleDialog::resizeEvent(QResizeEvent *event)
 
 void GrayscaleDialog::processImage( const QImage &image )
 {
-	qDebug() << image.format();
-	qDebug() << image.bytesPerLine();
-
 	mImageOriginal = image.copy(0,0,image.width(),image.height());
 	grayscaleAvg( image, ui->hsldGray->value() );
 
@@ -49,7 +46,7 @@ void GrayscaleDialog::processImage( const QImage &image )
 
 void GrayscaleDialog::on_buttonBox_accepted()
 {
-	emit( sigCommitImage( mImage ) );
+	emit( sigCommitImage( mImage, mTime ) );
 	GrayscaleDialog::close();
 }
 

@@ -10,8 +10,8 @@ SharpenDialog::SharpenDialog(QWidget *parent) :
 	mPixmapItem = new QGraphicsPixmapItem();
 	mScene.addItem( mPixmapItem );
 
-	connect( this,		SIGNAL( sigCommitImage(QImage) ),
-			 parent,	SLOT( updateImage(QImage) ) );
+	connect( this,		SIGNAL( sigCommitImage(QImage,qint64) ),
+			 parent,	SLOT( updateImage(QImage,qint64) ) );
 }
 
 SharpenDialog::~SharpenDialog()
@@ -43,7 +43,7 @@ void SharpenDialog::sharpen(const QImage &image)
 
 void SharpenDialog::on_buttonBox_accepted()
 {
-	emit( sigCommitImage( mImage ) );
+	emit( sigCommitImage( mImage, mTime ) );
 	SharpenDialog::close();
 }
 

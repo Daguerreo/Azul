@@ -35,7 +35,7 @@ private slots:
 	void on_buttonBox_accepted();
 
 signals:
-	void sigCommitImage(const QImage &image);
+	void sigCommitImage(const QImage &image, const qint64 &time);
 
 private:
 	Ui::ContrastDialog *ui;
@@ -44,6 +44,7 @@ private:
 	cv::Mat mat;
 	QImage mImage;
 	QImage mImageOriginal;
+	qint64 mTime;
 	double mContrast;
 	int mBrightness;
 };

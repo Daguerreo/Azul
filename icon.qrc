@@ -1,3 +1,9 @@
 <RCC>
-    <qresource prefix="/icon"/>
+    <qresource prefix="/">
+        <file>res/icon/open_folder.png</file>
+        <file>res/icon/save.png</file>
+        <file>res/icon/zoom_in.png</file>
+        <file>res/icon/zoom_out.png</file>
+        <file>res/icon/lenna.png</file>
+    </qresource>
 </RCC>

@@ -69,6 +69,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 			 mSharpenDialog,	SLOT( processImage(QImage) ) );
 
 	mSmoothingDialog = new SmoothingDialog( this );
+	connect( this,			SIGNAL( sigSmoothingDialog(QImage) ),
+			 mSmoothingDialog,	SLOT( processImage(QImage) ) );
 }
 
 MainWindow::~MainWindow()
@@ -77,12 +79,18 @@ MainWindow::~MainWindow()
 	delete mPixmapItem;
 }
 
-void MainWindow::updateImage(const QImage &image)
+void MainWindow::updateImage(const QImage &image, qint64 time=0)
 {
 	mImage = image.copy(0,0,image.width(),image.height());
 	mPixmapItem->setPixmap(QPixmap::fromImage(mImage));
 	mScene.setSceneRect(0, 0, mImage.width(), mImage.height());
-	ui->graphicsView->fitInView(mPixmapItem, Qt::KeepAspectRatio);
+
+	if( ui->action_Adapt_Zoom->isChecked() )
+	{
+		ui->graphicsView->fitInView(mPixmapItem, Qt::KeepAspectRatio);
+	}
+
+	updateStatusBar( mImage, time );
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -202,11 +210,6 @@ void MainWindow::on_action_Pixel_Info_triggered()
 	mPixelInfoDialog->show();
 }
 
-void MainWindow::scaleView( const float &factor )
-{
-
-}
-
 /*
 	overlap pixmap
 	mScene.clear();
@@ -235,6 +238,7 @@ void MainWindow::on_action_Sharpen_triggered()
 void MainWindow::on_action_Smoothing_triggered()
 {
 	mSmoothingDialog->show();
+	emit( sigSmoothingDialog( mImage ) );
 }
 
 void MainWindow::on_action_Adapt_Zoom_triggered()
@@ -247,15 +251,20 @@ void MainWindow::on_action_Adapt_Zoom_triggered()
 	}
 }
 
+void MainWindow::scaleView( const float &factor )
+{
+	mScaleFactor *= factor;
+	ui->action_Adapt_Zoom->setChecked(false);
+	ui->graphicsView->setTransform( QTransform::fromScale( mScaleFactor, mScaleFactor ) );
+	updateZoomBox();
+}
+
 void MainWindow::on_action_Zoom_In_triggered()
 {
 	if( mScaleFactor <= 0.01 )
 		return;
 
-	mScaleFactor *= (float) 0.8;
-	ui->action_Adapt_Zoom->setChecked(false);
-	ui->graphicsView->setTransform( QTransform::fromScale( mScaleFactor, mScaleFactor ) );
-	updateZoomBox();
+	scaleView( 0.8 );
 }
 
 
@@ -264,13 +273,8 @@ void MainWindow::on_action_Zoom_Out_triggered()
 	if( mScaleFactor >= 20)
 		return;
 
-	mScaleFactor *= (float) 1.25;
-	ui->action_Adapt_Zoom->setChecked(false);
-	ui->graphicsView->setTransform( QTransform::fromScale( mScaleFactor, mScaleFactor ) );
-	updateZoomBox();
+	scaleView( 1.25 );
 }
-
-
 
 void MainWindow::updateZoomBox()
 {
@@ -279,15 +283,22 @@ void MainWindow::updateZoomBox()
 
 void MainWindow::updateZoomBoxManually( int zoom )
 {
-	if(ui->action_Adapt_Zoom->isChecked())
-	{
-		ui->graphicsView->setTransform( QTransform::fromScale( zoom/100.0, zoom/100.0 ) );
-	}
+	//if(ui->action_Adapt_Zoom->isChecked())
+	//{
+		mScaleFactor = zoom/100.0;
+		ui->graphicsView->setTransform( QTransform::fromScale( mScaleFactor, mScaleFactor ) );
+		//ui->action_Adapt_Zoom->setChecked( false );
+	//}
 }
 
-void MainWindow::updateStatusBar(const QImage& image, qint64 elapsedTime)
+void MainWindow::updateStatusBar(const QImage &image, const qint64 &elapsedTime)
 {
-	double timeInms = elapsedTime/1000000.0;
+	double timeInms;
+
+	if( elapsedTime <= 0)
+		timeInms = 0;
+	else
+		timeInms = elapsedTime/1000000.0;
 
 	mLoadTime.setText(QString("Load Time: %1 ms")
 				.arg( timeInms, 0, 'f', 2 )
@@ -298,4 +309,29 @@ void MainWindow::updateStatusBar(const QImage& image, qint64 elapsedTime)
 				.arg( image.height() )
 				.arg( image.bitPlaneCount() )
 				);
+}
+
+void MainWindow::on_action_About_Qt_triggered()
+{
+	QMessageBox::aboutQt(this);
+}
+
+void MainWindow::on_action_Lenna_triggered()
+{
+	QString path( "C:/Users/Daguerreo/Documents/workaspace/Azul/res/Lenna.jpg");
+
+	if( path.isEmpty() )
+	{
+		return;
+	}
+
+	QElapsedTimer et;
+	et.start();
+
+	QImage image(path);
+	if( image.isNull() )
+		return;
+
+	showImage( image );
+	updateStatusBar( image, et.nsecsElapsed());
 }
