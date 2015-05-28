@@ -251,7 +251,7 @@ void MainWindow::on_action_Adapt_Zoom_triggered()
 	}
 }
 
-void MainWindow::scaleView( const float &factor )
+void MainWindow::scaleView( const double &factor )
 {
 	mScaleFactor *= factor;
 	ui->action_Adapt_Zoom->setChecked(false);

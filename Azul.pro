@@ -25,6 +25,7 @@ SOURCES += main.cpp\
     contrastdialog.cpp \
     sharpendialog.cpp \
     smoothingdialog.cpp \
+    gui/component/azulradiobuttongroupbox.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -32,14 +33,14 @@ HEADERS  += mainwindow.h \
     grayscaledialog.h \
     contrastdialog.h \
     sharpendialog.h \
-    smoothingdialog.h
+    smoothingdialog.h \
+    gui/component/azulradiobuttongroupbox.h
 
 FORMS    += mainwindow.ui \
     pixelinfodialog.ui \
     grayscaledialog.ui \
     contrastdialog.ui \
     sharpendialog.ui \
-    basedialog.ui \
     smoothingdialog.ui
 
 INCLUDEPATH += C:\\opencv\\opencv2410\\build\\include

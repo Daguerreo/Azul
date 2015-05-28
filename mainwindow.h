@@ -49,7 +49,7 @@ protected:
 
 protected slots:
 	void showImage( const QImage& image );
-	void scaleView( const float& factor );
+	void scaleView( const double &factor );
 	float getImageScaleFactor();
 	void updateZoomBox();
 	void updateZoomBoxManually(int zoom);
