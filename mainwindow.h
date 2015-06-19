@@ -6,6 +6,7 @@
 #include "contrastdialog.h"
 #include "sharpendialog.h"
 #include "smoothingdialog.h"
+#include "morphologydialog.h"
 
 #include <QMainWindow>
 #include <QGraphicsPixmapItem>
@@ -39,6 +40,7 @@ signals:
 	void sigContrastDialog( const QImage& image );
 	void sigSharpenDialog( const QImage& image );
 	void sigSmoothingDialog( const QImage& image );
+	void sigMorphologyDialog( const QImage& image );
 
 protected:
     void resizeEvent( QResizeEvent *event );
@@ -67,8 +69,8 @@ private slots:
 	void on_action_Zoom_Out_triggered();
 	void on_action_Zoom_In_triggered();
 	void on_action_About_Qt_triggered();
-
 	void on_action_Lenna_triggered();
+	void on_actionMorphologic_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -77,6 +79,7 @@ private:
 	ContrastDialog* mContrastDialog;
 	SharpenDialog* mSharpenDialog;
 	SmoothingDialog* mSmoothingDialog;
+	MorphologyDialog* mMorphologyDialog;
 
     QGraphicsPixmapItem* mPixmapItem;
     QGraphicsScene mScene;

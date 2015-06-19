@@ -93,7 +93,6 @@ void SmoothingDialog::bilateralFilter(const QImage &image, const int &kernel)
 void SmoothingDialog::gaussianFilter(const QImage &image, const int &kernel)
 {
 	cv::Mat tmp(image.height(),image.width(),CV_8UC4,(uchar*)image.bits(),image.bytesPerLine());
-	cv::blur( tmp, mMat, cv::Size( kernel, kernel ) );
 	//sigma x, sigma y -> 0 use the kernel size
 	cv::GaussianBlur( tmp, mMat, cv::Size( kernel, kernel ), 0, 0 );
 }

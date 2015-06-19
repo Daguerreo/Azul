@@ -17,6 +17,11 @@
 #include <QDateTime>
 #include <QGraphicsSceneMouseEvent>
 
+/*
+ * TODO
+ * - Add bilateral filter
+*/
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     /*
@@ -71,6 +76,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	mSmoothingDialog = new SmoothingDialog( this );
 	connect( this,			SIGNAL( sigSmoothingDialog(QImage) ),
 			 mSmoothingDialog,	SLOT( processImage(QImage) ) );
+
+	mMorphologyDialog = new MorphologyDialog( this );
+	connect( this,			SIGNAL( sigMorphologyDialog(QImage) ),
+			 mMorphologyDialog,	SLOT( processImage(QImage) ) );
 }
 
 MainWindow::~MainWindow()
@@ -334,4 +343,10 @@ void MainWindow::on_action_Lenna_triggered()
 
 	showImage( image );
 	updateStatusBar( image, et.nsecsElapsed());
+}
+
+void MainWindow::on_actionMorphologic_triggered()
+{
+	mMorphologyDialog->show();
+	emit( sigMorphologyDialog( mImage ) );
 }

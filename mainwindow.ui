@@ -485,6 +485,7 @@
     <addaction name="actionHistogram"/>
     <addaction name="actionColor_Histogram"/>
     <addaction name="actionTransform"/>
+    <addaction name="actionResize"/>
    </widget>
    <widget class="QMenu" name="menuFilters">
     <property name="title">
@@ -494,6 +495,8 @@
     <addaction name="action_Negative"/>
     <addaction name="action_Smoothing"/>
     <addaction name="action_Sharpen"/>
+    <addaction name="actionMorphologic"/>
+    <addaction name="actionMerge"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -704,6 +707,21 @@
   <action name="actionTransform">
    <property name="text">
     <string>Transform</string>
+   </property>
+  </action>
+  <action name="actionMorphologic">
+   <property name="text">
+    <string>Morphologic</string>
+   </property>
+  </action>
+  <action name="actionResize">
+   <property name="text">
+    <string>Resize</string>
+   </property>
+  </action>
+  <action name="actionMerge">
+   <property name="text">
+    <string>Merge</string>
    </property>
   </action>
  </widget>
