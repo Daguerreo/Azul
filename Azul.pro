@@ -64,20 +64,27 @@ FORMS    += \
     mainwindow.ui \
     gui/dialog/pixelinfodialog.ui
 
-CONFIG(debug, debug|release){
-    INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
-    LIBS += -L$$(OPENCV_DIR)\\build\\x64\\vc12\\lib \
-                -lopencv_core2410d \
-                -lopencv_highgui2410d \
-                -lopencv_imgproc2410d
-}
+win32{
+    contains(QMAKE_TARGET.arch, x86_64) {
+        message("64 bit")
+        CONFIG(debug, debug|release){
+            message("Debug Mode")
+            INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
+            LIBS += -L$$(OPENCV_DIR)\\build\\x64\\vc12\\lib \
+                        -lopencv_core2410d \
+                        -lopencv_highgui2410d \
+                        -lopencv_imgproc2410d
+        }
 
-CONFIG(release, debug|release) {
-    INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
-    LIBS += -L$$(OPENCV_DIR)\\build\\x64\\vc12\\lib \
-                -lopencv_core2410 \
-                -lopencv_highgui2410 \
-                -lopencv_imgproc2410
+        CONFIG(release, debug|release) {
+            message("Release Mode")
+            INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
+            LIBS += -L$$(OPENCV_DIR)\\build\\x64\\vc12\\lib \
+                        -lopencv_core2410 \
+                        -lopencv_highgui2410 \
+                        -lopencv_imgproc2410
+        }
+    }
 }
 
 RESOURCES += \
