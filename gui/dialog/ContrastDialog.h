@@ -17,7 +17,6 @@ public:
 
 protected:
 	void setOptions();
-	void buttonApplyClicked();
 
 protected slots:
 	void processImage();

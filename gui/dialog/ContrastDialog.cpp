@@ -2,7 +2,7 @@
 
 ContrastDialog::ContrastDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator)
 {
-	setWindowTitle(tr("Contrast Dialog"));
+	setWindowTitle(tr("Contrast/Brightness Regolation"));
 	connect( this,	SIGNAL( sigApplyClicked() ),
 			 this,	SLOT( processImage()) );
 
