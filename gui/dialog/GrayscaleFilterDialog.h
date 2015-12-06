@@ -8,13 +8,13 @@
 #include <RadioButtonGroupBox.h>
 #include <SliderGroupBox.h>
 
-class GrayscaleDialog : public BaseDialog
+class GrayscaleFilterDialog : public BaseDialog
 {
 	Q_OBJECT
 
 public:
-	explicit GrayscaleDialog(QWidget *parent, Mediator *mediator);
-	~GrayscaleDialog();
+	explicit GrayscaleFilterDialog(QWidget *parent, Mediator *mediator);
+	~GrayscaleFilterDialog();
 
 protected:
 	void setOptions();

@@ -1,6 +1,6 @@
-#include "GrayscaleDialog.h"
+#include "GrayscaleFilterDialog.h"
 
-GrayscaleDialog::GrayscaleDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator)
+GrayscaleFilterDialog::GrayscaleFilterDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator)
 {
 	setWindowTitle(tr("Grayscale Dialog"));
 	connect( this,	SIGNAL( sigApplyClicked() ),
@@ -23,20 +23,20 @@ GrayscaleDialog::GrayscaleDialog(QWidget* parent, Mediator* mediator) : BaseDial
 	setOptions();
 }
 
-GrayscaleDialog::~GrayscaleDialog()
+GrayscaleFilterDialog::~GrayscaleFilterDialog()
 {
 	delete mAlgoRadio;
 	delete mGraySlider;
 }
 
-void GrayscaleDialog::setOptions()
+void GrayscaleFilterDialog::setOptions()
 {
 	addComponent(mAlgoRadio);
 	addComponent(mGraySlider);
 	BaseDialog::setOptions();
 }
 
-void GrayscaleDialog::processImage()
+void GrayscaleFilterDialog::processImage()
 {
 	switch( mAlgoRadio->checkedRadio() )
 	{
@@ -69,7 +69,7 @@ void GrayscaleDialog::processImage()
 	displayImage( image );
 }
 
-void GrayscaleDialog::enableSlider( int index )
+void GrayscaleFilterDialog::enableSlider( int index )
 {
 
 	if( index != 0)
