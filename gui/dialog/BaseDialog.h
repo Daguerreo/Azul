@@ -23,7 +23,7 @@ public:
 	void addComponent(QWidget *widget);
 
 public slots:
-	virtual void openDialog();
+	void openDialog();
 	void buttonOkClicked();
 	void buttonCancelClicked();
 	void buttonApplyClicked();
