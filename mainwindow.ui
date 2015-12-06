@@ -503,7 +503,6 @@
     <addaction name="action_Smoothing"/>
     <addaction name="action_Sharpen"/>
     <addaction name="action_Morphology"/>
-    <addaction name="action_Merge"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -628,7 +627,7 @@
   </action>
   <action name="action_Pixel_Info">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Pixel Info</string>
@@ -709,7 +708,7 @@
   </action>
   <action name="action_Smoothing">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Smooth</string>

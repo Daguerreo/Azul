@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     gui/dialog/ContrastDialog.cpp \
     ImageProcessor.cpp \
     gui/dialog/NegativeFilterDialog.cpp \
-    gui/dialog/GrayscaleFilterDialog.cpp
+    gui/dialog/GrayscaleFilterDialog.cpp \
+    gui/dialog/pixelinfodialog.cpp
 
 
 HEADERS  += \
@@ -55,10 +56,13 @@ HEADERS  += \
     gui/dialog/ContrastDialog.h \
     ImageProcessor.h \
     gui/dialog/NegativeFilterDialog.h \
-    gui/dialog/GrayscaleFilterDialog.h
+    gui/dialog/GrayscaleFilterDialog.h \
+    gui/dialog/pixelinfodialog.h \
+    ui_mainwindow.h
 
 FORMS    += \
-    mainwindow.ui
+    mainwindow.ui \
+    gui/dialog/pixelinfodialog.ui
 
 CONFIG(debug, debug|release){
     INCLUDEPATH += $$(OPENCV_DIR)\\build\\include

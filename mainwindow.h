@@ -10,6 +10,7 @@
 #include <GrayscaleFilterDialog.h>
 #include <ContrastDialog.h>
 #include <NegativeFilterDialog.h>
+#include <pixelinfodialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +34,7 @@ protected:
 private slots:
 	void resizeEvent(QResizeEvent *event);
 	void closeEvent(QCloseEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event);
 	float getImageScaleFactor();
 	void updateZoomBox();
 	void updateZoomBoxManually(int zoom);
@@ -52,8 +54,6 @@ private slots:
 	void on_action_Smoothing_triggered();
 	void on_action_Morphology_triggered();
 	void on_action_About_Qt_triggered();
-
-
 	void on_action_Negative_triggered();
 
 private:
@@ -73,11 +73,13 @@ private:
 	GrayscaleFilterDialog* mGrayscaleDialog;
 	ContrastDialog* mContrastDialog;
 	NegativeFilterDialog* mNegativeDialog;
+	PixelInfoDialog* mPixelInfoDialog;
 
 signals:
 	void sigOpenGrayscaleDialog();
 	void sigOpenContrastDialog();
 	void sigOpenNegativeDialog();
+	void sigOpenPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
  };
 
 #endif // MAINWINDOW_H

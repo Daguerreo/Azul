@@ -6,15 +6,17 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QGraphicsSceneMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     /*
      * Setup Scene
      */
-    ui->setupUi(this);
-	ui->graphicsView->setScene(&mScene);
-	ui->graphicsView->setMouseTracking(true);
+	ui->setupUi( this );
+	ui->graphicsView->setScene( &mScene );
+	ui->graphicsView->setMouseTracking( true );
+	mScene.installEventFilter( this );
 	mPixmapItem = new QGraphicsPixmapItem();
 	mScene.addItem( mPixmapItem );
 
@@ -49,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	mNegativeDialog = new NegativeFilterDialog(this, mMediator);
 	connect( this,				SIGNAL( sigOpenNegativeDialog() ),
 			 mNegativeDialog,	SLOT( openDialog() ) );
+
+	mPixelInfoDialog = new PixelInfoDialog(this);
+	connect( this,				SIGNAL( sigOpenPixelInfoDialog(QPixmap, QPointF) ),
+			 mPixelInfoDialog,	SLOT( updateClip(QPixmap, QPointF) ) );
 
 }
 
@@ -85,6 +91,32 @@ void MainWindow::closeEvent(QCloseEvent *event)
 		event->ignore();
 	else
 		event->accept();
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+	Q_UNUSED( obj ); //zittisce il compilatore dal warning;
+
+	if( event->type() == QEvent::GraphicsSceneMouseMove )
+	{
+		QGraphicsSceneMouseEvent* mouseMov = static_cast<QGraphicsSceneMouseEvent*>(event);
+		if( !mPixmapItem->contains( mouseMov->scenePos() ) )
+				return true;
+
+		int dimX = mPixelInfoDialog->getWidthClip();
+		int dimY = mPixelInfoDialog->getHeightClip();
+
+		QPointF topLeft = mouseMov->scenePos();
+		topLeft -= QPointF( dimX/2, dimY/2 );
+		QRect rect( topLeft.toPoint(), QSize( dimX, dimY ));
+
+		QPixmap clip = mPixmapItem->pixmap().copy( rect );
+		emit( sigOpenPixelInfoDialog( clip, mouseMov->scenePos() ) );
+
+		return true;
+	}
+
+	return false;
 }
 
 float MainWindow::getImageScaleFactor()
@@ -206,6 +238,7 @@ void MainWindow::on_action_Original_Size_triggered()
 
 void MainWindow::on_action_Pixel_Info_triggered()
 {
+	mPixelInfoDialog->show();
 }
 
 void MainWindow::on_action_Contrast_Brightness_triggered()

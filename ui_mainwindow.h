@@ -139,7 +139,7 @@ public:
         action_Open->setIcon(icon);
         action_Pixel_Info = new QAction(MainWindow);
         action_Pixel_Info->setObjectName(QStringLiteral("action_Pixel_Info"));
-        action_Pixel_Info->setEnabled(false);
+        action_Pixel_Info->setEnabled(true);
         action_Save = new QAction(MainWindow);
         action_Save->setObjectName(QStringLiteral("action_Save"));
         QIcon icon1;
@@ -169,7 +169,7 @@ public:
         action_Sharpen->setEnabled(false);
         action_Smoothing = new QAction(MainWindow);
         action_Smoothing->setObjectName(QStringLiteral("action_Smoothing"));
-        action_Smoothing->setEnabled(false);
+        action_Smoothing->setEnabled(true);
         action_Adapt_Zoom = new QAction(MainWindow);
         action_Adapt_Zoom->setObjectName(QStringLiteral("action_Adapt_Zoom"));
         action_Adapt_Zoom->setCheckable(true);
@@ -273,7 +273,6 @@ public:
         menuFilters->addAction(action_Smoothing);
         menuFilters->addAction(action_Sharpen);
         menuFilters->addAction(action_Morphology);
-        menuFilters->addAction(action_Merge);
         menuView->addAction(action_Adapt_Zoom);
         menuView->addAction(action_Zoom_In);
         menuView->addAction(action_Zoom_Out);
