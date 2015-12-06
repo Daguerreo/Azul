@@ -38,13 +38,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	/*
 	 * Setup Dialogs
 	 */
-	mGrayscaleDialog = new GrayscaleDialog(this, mMediator);
+	mGrayscaleDialog = new GrayscaleFilterDialog(this, mMediator);
 	connect( this,				SIGNAL( sigOpenGrayscaleDialog() ),
 			 mGrayscaleDialog,	SLOT( openDialog() ) );
 
 	mContrastDialog = new ContrastDialog(this, mMediator);
 	connect( this,				SIGNAL( sigOpenContrastDialog() ),
 			 mContrastDialog,	SLOT( openDialog() ) );
+
+	mNegativeDialog = new NegativeFilterDialog(this, mMediator);
+	connect( this,				SIGNAL( sigOpenNegativeDialog() ),
+			 mNegativeDialog,	SLOT( openDialog() ) );
 
 }
 
@@ -241,4 +245,10 @@ void MainWindow::on_action_Morphology_triggered()
 void MainWindow::on_action_About_Qt_triggered()
 {
 	QMessageBox::aboutQt(this);
+}
+
+void MainWindow::on_action_Negative_triggered()
+{
+	mNegativeDialog->show();
+	emit( sigOpenNegativeDialog() );
 }

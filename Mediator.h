@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include <Image.h>
-#include <ImageProcessing.h>
+#include <ImageProcessor.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -34,6 +34,7 @@ public:
 	void grayscaleMax();
 	void grayscaleMin();
 	void contrast(const double &contrast, const int &brightness);
+	void negativeFilter();
 
 private:
 	Image mImage;

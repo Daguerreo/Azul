@@ -17,9 +17,9 @@ DEFINES += APP_NAME=\\\"Azul\\\"
 VERSION = 0.2.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
-INCLUDEPATH += $$PWD/gui \
-               $$PWD/gui/widget \
-               $$PWD/gui/dialog
+INCLUDEPATH += $$PWD\\gui \
+               $$PWD\\gui\\widget \
+               $$PWD\\gui\\dialog
 
 SOURCES += main.cpp\
     gui/widget/CommitButtonsFrame.cpp \
@@ -30,12 +30,13 @@ SOURCES += main.cpp\
     gui/widget/SliderGroupBox.cpp \
     gui/widget/DoubleSlider.cpp \
     gui/dialog/BaseDialog.cpp \
-    ImageProcessing.cpp \
     Image.cpp \
-    gui/dialog/GrayscaleDialog.cpp \
     Mediator.cpp \
     mainwindow.cpp \
-    gui/dialog/ContrastDialog.cpp
+    gui/dialog/ContrastDialog.cpp \
+    ImageProcessor.cpp \
+    gui/dialog/NegativeFilterDialog.cpp \
+    gui/dialog/GrayscaleFilterDialog.cpp
 
 
 HEADERS  += \
@@ -47,13 +48,14 @@ HEADERS  += \
     gui/widget/Doubleslider.h \
     gui/widget/SliderGroupBox.h \
     gui/dialog/BaseDialog.h \
-    ImageProcessing.h \
     Image.h \
-    gui/dialog/GrayscaleDialog.h \
     Mediator.h \
     mainwindow.h \
     mainwindow.h \
-    gui/dialog/ContrastDialog.h
+    gui/dialog/ContrastDialog.h \
+    ImageProcessor.h \
+    gui/dialog/NegativeFilterDialog.h \
+    gui/dialog/GrayscaleFilterDialog.h
 
 FORMS    += \
     mainwindow.ui

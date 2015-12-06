@@ -77,7 +77,7 @@ void Mediator::grayscaleAverage(const int& range)
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::grayscaleAverage( mat, range);
+	ImageProcessor::grayscaleAverage( mat, range);
 	matchWCMat2Qimage( mat );
 }
 
@@ -85,7 +85,7 @@ void Mediator::grayscaleDesaturation()
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::grayscaleDesaturation( mat );
+	ImageProcessor::grayscaleDesaturation( mat );
 	matchWCMat2Qimage( mat );
 }
 
@@ -93,7 +93,7 @@ void Mediator::grayscaleLuma()
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::grayscaleLuma( mat );
+	ImageProcessor::grayscaleLuma( mat );
 	matchWCMat2Qimage( mat );
 }
 
@@ -101,7 +101,7 @@ void Mediator::grayscaleMax()
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::grayscaleMax( mat );
+	ImageProcessor::grayscaleMax( mat );
 	matchWCMat2Qimage( mat );
 }
 
@@ -110,7 +110,7 @@ void Mediator::grayscaleMin()
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::grayscaleMin( mat );
+	ImageProcessor::grayscaleMin( mat );
 	matchWCMat2Qimage( mat );
 }
 
@@ -118,7 +118,14 @@ void Mediator::contrast(const double &contrast, const int &brightness)
 {
 	createWorkingCopy();
 	cv::Mat mat = mWCImage.getMat();
-	ImageProcessing::contrastBrightness( mat, contrast, brightness );
+	ImageProcessor::contrastBrightness( mat, contrast, brightness );
 	matchWCMat2Qimage( mat );
 }
 
+void Mediator::negativeFilter()
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::negative( mat );
+	matchWCMat2Qimage( mat );
+}

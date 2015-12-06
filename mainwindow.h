@@ -7,8 +7,9 @@
 #include <QSpinBox>
 
 #include <Mediator.h>
-#include <GrayscaleDialog.h>
+#include <GrayscaleFilterDialog.h>
 #include <ContrastDialog.h>
+#include <NegativeFilterDialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -53,6 +54,8 @@ private slots:
 	void on_action_About_Qt_triggered();
 
 
+	void on_action_Negative_triggered();
+
 private:
 	// View
 	Ui::MainWindow* ui;
@@ -67,12 +70,14 @@ private:
 	QSpinBox mZoomBox;
 
 	// Dialogs
-	GrayscaleDialog* mGrayscaleDialog;
+	GrayscaleFilterDialog* mGrayscaleDialog;
 	ContrastDialog* mContrastDialog;
+	NegativeFilterDialog* mNegativeDialog;
 
 signals:
 	void sigOpenGrayscaleDialog();
 	void sigOpenContrastDialog();
+	void sigOpenNegativeDialog();
  };
 
 #endif // MAINWINDOW_H
