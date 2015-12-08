@@ -11,7 +11,7 @@ CommitButtonsFrame::CommitButtonsFrame(QWidget *parent, const bool &hasApplyButt
 	mButtonCancel = new QPushButton(tr("Cancel"), this);
 	hasApply = hasApplyButton;
 
-	mGrid->addItem(mSpacer,		0,0);
+	mGrid->addItem(mSpacer,			0,0);
 	mGrid->addWidget(mButtonOk,		0,2);
 	mGrid->addWidget(mButtonCancel,	1,2);
 
