@@ -16,6 +16,7 @@ TEMPLATE = app
 DEFINES += APP_NAME=\\\"Azul\\\"
 VERSION = 0.2.0
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+#CONFIG += debug_and_release
 
 INCLUDEPATH += $$PWD\\gui \
                $$PWD\\gui\\widget \
@@ -76,12 +77,28 @@ win32{
                         -lopencv_core2410d \
                         -lopencv_highgui2410d \
                         -lopencv_imgproc2410d
-        }
-
-        CONFIG(release, debug|release) {
+        }else{
             message("Release Mode")
             INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
             LIBS += -L$$(OPENCV_DIR)\\build\\x64\\vc12\\lib \
+                        -lopencv_core2410 \
+                        -lopencv_highgui2410 \
+                        -lopencv_imgproc2410
+        }
+    }
+    contains(QMAKE_TARGET.arch, x86){
+        message("32 bit")
+        CONFIG(debug, debug|release){
+            message("Debug Mode")
+            INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
+            LIBS += -L$$(OPENCV_DIR)\\build\\x86\\vc12\\lib \
+                        -lopencv_core2410d \
+                        -lopencv_highgui2410d \
+                        -lopencv_imgproc2410d
+        }else{
+            message("Release Mode")
+            INCLUDEPATH += $$(OPENCV_DIR)\\build\\include
+            LIBS += -L$$(OPENCV_DIR)\\build\\x86\\vc12\\lib \
                         -lopencv_core2410 \
                         -lopencv_highgui2410 \
                         -lopencv_imgproc2410
