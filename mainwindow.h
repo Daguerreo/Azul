@@ -6,11 +6,12 @@
 #include <QGraphicsScene>
 #include <QSpinBox>
 
-#include <Mediator.h>
+#include <Controller.h>
 #include <GrayscaleFilterDialog.h>
 #include <ContrastDialog.h>
 #include <NegativeFilterDialog.h>
-#include <pixelinfodialog.h>
+#include <PixelInfoDialog.h>
+#include <SmoothingFilterDialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -58,28 +59,30 @@ private slots:
 
 private:
 	// View
-	Ui::MainWindow* ui;
-    QGraphicsPixmapItem* mPixmapItem;
-	QGraphicsScene mScene;
+	Ui::MainWindow*			ui;
+	QGraphicsPixmapItem*	mPixmapItem;
+	QGraphicsScene			mScene;
 
 	// Variables
-	Mediator* mMediator;
-	double mScaleFactor;
-	QLabel mLoadTime;
-	QLabel mImageSize;
-	QSpinBox mZoomBox;
+	Controller*				mController;
+	double					mScaleFactor;
+	QLabel					mLoadTime;
+	QLabel					mImageSize;
+	QSpinBox				mZoomBox;
 
 	// Dialogs
-	GrayscaleFilterDialog* mGrayscaleDialog;
-	ContrastDialog* mContrastDialog;
-	NegativeFilterDialog* mNegativeDialog;
-	PixelInfoDialog* mPixelInfoDialog;
+	GrayscaleFilterDialog*	mGrayscaleDialog;
+	ContrastDialog*			mContrastDialog;
+	NegativeFilterDialog*	mNegativeDialog;
+	PixelInfoDialog*		mPixelInfoDialog;
+	SmoothingFilterDialog*	mSmoothingDialog;
 
 signals:
 	void sigOpenGrayscaleDialog();
 	void sigOpenContrastDialog();
 	void sigOpenNegativeDialog();
 	void sigOpenPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
+	void sigOpenSmoothingDialog();
  };
 
 #endif // MAINWINDOW_H

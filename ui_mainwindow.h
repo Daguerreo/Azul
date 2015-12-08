@@ -147,7 +147,7 @@ public:
         action_Save->setIcon(icon1);
         action_Close = new QAction(MainWindow);
         action_Close->setObjectName(QStringLiteral("action_Close"));
-        action_Close->setEnabled(false);
+        action_Close->setEnabled(true);
         action_Grayscale = new QAction(MainWindow);
         action_Grayscale->setObjectName(QStringLiteral("action_Grayscale"));
         action_Quit = new QAction(MainWindow);

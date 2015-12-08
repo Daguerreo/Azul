@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	/*
 	 * Setup Variables
 	 */
-	mMediator = new Mediator();
+	mController = new Controller();
 	mScaleFactor = 1.0;
 	mZoomBox.setMinimum(1);
 	mZoomBox.setMaximum(2000);
@@ -40,15 +40,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	/*
 	 * Setup Dialogs
 	 */
-	mGrayscaleDialog = new GrayscaleFilterDialog(this, mMediator);
+	mGrayscaleDialog = new GrayscaleFilterDialog(this, mController);
 	connect( this,				SIGNAL( sigOpenGrayscaleDialog() ),
 			 mGrayscaleDialog,	SLOT( openDialog() ) );
 
-	mContrastDialog = new ContrastDialog(this, mMediator);
+	mContrastDialog = new ContrastDialog(this, mController);
 	connect( this,				SIGNAL( sigOpenContrastDialog() ),
 			 mContrastDialog,	SLOT( openDialog() ) );
 
-	mNegativeDialog = new NegativeFilterDialog(this, mMediator);
+	mNegativeDialog = new NegativeFilterDialog(this, mController);
 	connect( this,				SIGNAL( sigOpenNegativeDialog() ),
 			 mNegativeDialog,	SLOT( openDialog() ) );
 
@@ -56,14 +56,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	connect( this,				SIGNAL( sigOpenPixelInfoDialog(QPixmap, QPointF) ),
 			 mPixelInfoDialog,	SLOT( updateClip(QPixmap, QPointF) ) );
 
+	mSmoothingDialog = new SmoothingFilterDialog(this, mController);
+	connect( this,				SIGNAL( sigOpenSmoothingDialog() ),
+			 mSmoothingDialog,	SLOT( openDialog() ) );
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 	delete mPixmapItem;
-	delete mMediator;
+	delete mController;
 	delete mGrayscaleDialog;
+	delete mContrastDialog;
+	delete mNegativeDialog;
+	delete mPixelInfoDialog;
+	delete mSmoothingDialog;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -126,7 +134,7 @@ float MainWindow::getImageScaleFactor()
 
 void MainWindow::updateView()
 {
-	QImage image = mMediator->requestQImage();
+	QImage image = mController->requestQImage();
 	displayImage(image);
 }
 
@@ -171,19 +179,19 @@ void MainWindow::updateZoomBoxManually(int zoom)
 void MainWindow::on_action_Open_triggered()
 {
 	QString path = QFileDialog::getOpenFileName(this, tr("Open Image"), "", tr("Image Files (*.png *.jpg *.jpeg *.bmp)"));
-	bool success = mMediator->createImage( path );
+	bool success = mController->createImage( path );
 
 	if( !success )
 		return;
 
-	QImage image = mMediator->requestQImage();
+	QImage image = mController->requestQImage();
 	displayImage( image );
 }
 
 void MainWindow::on_action_Save_triggered()
 {
 	QString path = QFileDialog::getSaveFileName(this, tr("Save File"),"",tr("JPEG (*.jpg *.jpeg);BMP (*.bmp);PNG (*.png)"));
-	QImage image = mMediator->requestQImage();
+	QImage image = mController->requestQImage();
 	image.save( path );
 }
 
@@ -265,6 +273,8 @@ void MainWindow::on_action_Sharpen_triggered()
 
 void MainWindow::on_action_Smoothing_triggered()
 {
+	mSmoothingDialog->show();
+	emit sigOpenSmoothingDialog();
 }
 
 void MainWindow::on_action_Morphology_triggered()

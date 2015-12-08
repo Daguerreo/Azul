@@ -31,13 +31,14 @@ SOURCES += main.cpp\
     gui/widget/DoubleSlider.cpp \
     gui/dialog/BaseDialog.cpp \
     Image.cpp \
-    Mediator.cpp \
     mainwindow.cpp \
     gui/dialog/ContrastDialog.cpp \
     ImageProcessor.cpp \
     gui/dialog/NegativeFilterDialog.cpp \
     gui/dialog/GrayscaleFilterDialog.cpp \
-    gui/dialog/pixelinfodialog.cpp
+    gui/dialog/PixelInfoDialog.cpp \
+    Controller.cpp \
+    gui/dialog/SmoothingFilterDialog.cpp
 
 
 HEADERS  += \
@@ -50,15 +51,16 @@ HEADERS  += \
     gui/widget/SliderGroupBox.h \
     gui/dialog/BaseDialog.h \
     Image.h \
-    Mediator.h \
     mainwindow.h \
     mainwindow.h \
     gui/dialog/ContrastDialog.h \
     ImageProcessor.h \
     gui/dialog/NegativeFilterDialog.h \
     gui/dialog/GrayscaleFilterDialog.h \
-    gui/dialog/pixelinfodialog.h \
-    ui_mainwindow.h
+    ui_mainwindow.h \
+    gui/dialog/PixelInfoDialog.h \
+    Controller.h \
+    gui/dialog/SmoothingFilterDialog.h
 
 FORMS    += \
     mainwindow.ui \
