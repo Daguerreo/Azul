@@ -36,7 +36,6 @@ int PixelInfoDialog::getHeightClip() const
     return ZOOM_DIM_Y;
 }
 
-
 void PixelInfoDialog::updateClip(const QPixmap &clip, const QPointF mousePos)
 {
 	mPixmapItem->setPixmap( clip );
