@@ -72,6 +72,11 @@ void RadioButtonGroupBox::setText( const int &index, const QString &text )
 	mRadioButtons.at(index)->setText( text );
 }
 
+QRadioButton* RadioButtonGroupBox::getRadio(const int& index)
+{
+	return mRadioButtons.at(index);
+}
+
 void RadioButtonGroupBox::valueToggled( bool toggled )
 {
 	Q_UNUSED( toggled )

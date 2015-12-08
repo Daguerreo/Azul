@@ -21,6 +21,8 @@ public:
 	QString getText(const int &index);
 	void setText(const int &index, const QString &text);
 
+	QRadioButton *getRadio(const int &index);
+
 protected slots:
 	void valueToggled(bool toggled);
 
