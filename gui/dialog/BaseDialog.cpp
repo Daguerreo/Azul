@@ -1,6 +1,6 @@
 #include "BaseDialog.h"
 
-BaseDialog::BaseDialog(QWidget* parent, Mediator* mediator, bool hasApplyButton) : QDialog(parent)
+BaseDialog::BaseDialog(QWidget* parent, Controller* controller, bool hasApplyButton) : QDialog(parent)
 {
 	setWindowTitle(tr("Dialog"));
 	setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred );
@@ -13,7 +13,7 @@ BaseDialog::BaseDialog(QWidget* parent, Mediator* mediator, bool hasApplyButton)
 
 	mLayout = new QHBoxLayout(this);
 	mSpacer = new QSpacerItem(10, 10, QSizePolicy::Minimum, QSizePolicy::Expanding);
-	mMediator = mediator;
+	mController = controller;
 
 	/*
 	 * Set up the graphic view
@@ -84,7 +84,7 @@ void BaseDialog::addComponent(QWidget* widget)
 
 void BaseDialog::openDialog()
 {
-	mMediator->createWorkingCopy();
+	mController->createWorkingCopy();
 	processImage();
 }
 
@@ -97,7 +97,7 @@ void BaseDialog::displayImage(const QImage& image)
 
 void BaseDialog::processImage()
 {
-	QImage image = mMediator->requestWCQImage();
+	QImage image = mController->requestWCQImage();
 	displayImage( image );
 }
 
@@ -115,14 +115,14 @@ void BaseDialog::setOptions()
 
 void BaseDialog::buttonOkClicked()
 {
-	mMediator->commitImage();
+	mController->commitImage();
 	emit( sigUpdateMainWindow() );
 	close();
 }
 
 void BaseDialog::buttonCancelClicked()
 {
-	mMediator->cleanWorkingCopy();
+	mController->cleanWorkingCopy();
 	close();
 }
 void BaseDialog::buttonApplyClicked()

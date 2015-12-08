@@ -8,7 +8,7 @@
 #include <QHBoxLayout>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
-#include <Mediator.h>
+#include <Controller.h>
 #include <OptionsFrame.h>
 #include <CommitButtonsFrame.h>
 
@@ -17,7 +17,7 @@ class BaseDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit BaseDialog(QWidget *parent=0, Mediator *mediator=0, bool hasApplyButton=true);
+	explicit BaseDialog(QWidget *parent=0, Controller *controller=0, bool hasApplyButton=true);
 	~BaseDialog();
 
 	void addComponent(QWidget *widget);
@@ -43,7 +43,7 @@ protected:
 	OptionsFrame* mOptionsFrame;
 	CommitButtonsFrame* mCommitFrame;
 	QSpacerItem* mSpacer;
-	Mediator* mMediator;
+	Controller* mController;
 
 signals:
 	void sigUpdateMainWindow();

@@ -13,7 +13,7 @@ class GrayscaleFilterDialog : public BaseDialog
 	Q_OBJECT
 
 public:
-	explicit GrayscaleFilterDialog(QWidget *parent, Mediator *mediator);
+	explicit GrayscaleFilterDialog(QWidget *parent, Controller *controller);
 	~GrayscaleFilterDialog();
 
 protected:

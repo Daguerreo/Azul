@@ -1,6 +1,6 @@
 #include "ContrastDialog.h"
 
-ContrastDialog::ContrastDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator)
+ContrastDialog::ContrastDialog(QWidget* parent, Controller* controller) : BaseDialog(parent, controller)
 {
 	setWindowTitle(tr("Contrast/Brightness Regolation"));
 	connect( this,	SIGNAL( sigApplyClicked() ),
@@ -33,8 +33,8 @@ void ContrastDialog::processImage()
 	double contrast = mContrastSlider->getValue();
 	int brightness = mBrightnesSlider->getValue();
 
-	mMediator->contrast( contrast, brightness );
+	mController->contrast( contrast, brightness );
 
-	QImage image = mMediator->requestWCQImage();
+	QImage image = mController->requestWCQImage();
 	displayImage( image );
 }

@@ -10,7 +10,7 @@ class NegativeFilterDialog : public BaseDialog
 	Q_OBJECT
 
 public:
-	NegativeFilterDialog(QWidget *parent, Mediator *mediator);
+	NegativeFilterDialog(QWidget *parent, Controller *controller);
 	~NegativeFilterDialog();
 
 protected:

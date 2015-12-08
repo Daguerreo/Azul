@@ -1,8 +1,8 @@
 #include "GrayscaleFilterDialog.h"
 
-GrayscaleFilterDialog::GrayscaleFilterDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator)
+GrayscaleFilterDialog::GrayscaleFilterDialog(QWidget* parent, Controller* controller) : BaseDialog(parent, controller)
 {
-	setWindowTitle(tr("Grayscale Dialog"));
+	setWindowTitle(tr("Grayscale Filter Dialog"));
 	connect( this,	SIGNAL( sigApplyClicked() ),
 			 this,	SLOT( processImage()) );
 
@@ -41,31 +41,31 @@ void GrayscaleFilterDialog::processImage()
 	switch( mAlgoRadio->checkedRadio() )
 	{
 	case 0: // Average
-		mMediator->grayscaleAverage( mGraySlider->getValue() );
+		mController->grayscaleAverage( mGraySlider->getValue() );
 		break;
 
 	case 1: // Luma
-		mMediator->grayscaleLuma();
+		mController->grayscaleLuma();
 		break;
 
 	case 2: // Desaturation
-		mMediator->grayscaleDesaturation();
+		mController->grayscaleDesaturation();
 		break;
 
 	case 3: // Min
-		mMediator->grayscaleMin();
+		mController->grayscaleMin();
 		break;
 
 	case 4: // Max
-		mMediator->grayscaleMax();
+		mController->grayscaleMax();
 		break;
 
 	default: // Averate
-		mMediator->grayscaleAverage( mGraySlider->getValue() );
+		mController->grayscaleAverage( mGraySlider->getValue() );
 		break;
 	}
 
-	QImage image = mMediator->requestWCQImage();
+	QImage image = mController->requestWCQImage();
 	displayImage( image );
 }
 

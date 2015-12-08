@@ -1,6 +1,6 @@
 #include "NegativeFilterDialog.h"
 
-NegativeFilterDialog::NegativeFilterDialog(QWidget* parent, Mediator* mediator) : BaseDialog(parent, mediator, false)
+NegativeFilterDialog::NegativeFilterDialog(QWidget* parent, Controller* controller) : BaseDialog(parent, controller, false)
 {
 	setWindowTitle(tr("Negative Filter"));
 
@@ -12,8 +12,8 @@ NegativeFilterDialog::~NegativeFilterDialog()
 
 void NegativeFilterDialog::processImage()
 {
-	mMediator->negativeFilter();
+	mController->negativeFilter();
 
-	QImage image = mMediator->requestWCQImage();
+	QImage image = mController->requestWCQImage();
 	displayImage( image );
 }

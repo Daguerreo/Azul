@@ -1,4 +1,4 @@
-#include "pixelinfodialog.h"
+#include "PixelInfoDialog.h"
 #include "ui_pixelinfodialog.h"
 
 #define ZOOM_DIM_X 25

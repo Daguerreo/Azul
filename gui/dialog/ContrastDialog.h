@@ -12,7 +12,7 @@ class ContrastDialog : public BaseDialog
 	Q_OBJECT
 
 public:
-	explicit ContrastDialog(QWidget *parent, Mediator *mediator);
+	explicit ContrastDialog(QWidget *parent, Controller *controller);
 	~ContrastDialog();
 
 protected:
