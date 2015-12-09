@@ -503,6 +503,7 @@
     <addaction name="action_Smoothing"/>
     <addaction name="action_Sharpen"/>
     <addaction name="action_Morphology"/>
+    <addaction name="action_Canny"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -784,6 +785,11 @@
    </property>
    <property name="text">
     <string>Merge</string>
+   </property>
+  </action>
+  <action name="action_Canny">
+   <property name="text">
+    <string>Canny</string>
    </property>
   </action>
  </widget>

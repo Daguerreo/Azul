@@ -12,6 +12,7 @@
 #include <NegativeFilterDialog.h>
 #include <PixelInfoDialog.h>
 #include <SmoothingFilterDialog.h>
+#include <CannyFilterDialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -56,6 +57,7 @@ private slots:
 	void on_action_Morphology_triggered();
 	void on_action_About_Qt_triggered();
 	void on_action_Negative_triggered();
+	void on_action_Canny_triggered();
 
 private:
 	// View
@@ -76,6 +78,7 @@ private:
 	NegativeFilterDialog*	mNegativeDialog;
 	PixelInfoDialog*		mPixelInfoDialog;
 	SmoothingFilterDialog*	mSmoothingDialog;
+	CannyFilterDialog*		mCannyDialog;
 
 signals:
 	void sigOpenGrayscaleDialog();
@@ -83,6 +86,7 @@ signals:
 	void sigOpenNegativeDialog();
 	void sigOpenPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
 	void sigOpenSmoothingDialog();
+	void sigOpenCannyDialog();
  };
 
 #endif // MAINWINDOW_H

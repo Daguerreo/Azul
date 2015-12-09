@@ -38,6 +38,7 @@ public:
 	void meanFilter(const int &kernelRadius);
 	void medianFilter(const int &kernelRadius);
 	void gaussianFilter(const int &kernelRadius);
+	void cannyFilter(const int &min, const int &max);
 
 private:
 	Image mImage;

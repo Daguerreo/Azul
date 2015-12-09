@@ -153,3 +153,11 @@ void Controller::gaussianFilter(const int &kernelRadius)
 	ImageProcessor::gaussianFilter( mat , kernelRadius );
 	matchWCMat2Qimage( mat );
 }
+
+void Controller::cannyFilter(const int& min, const int& max)
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::cannyFilter( mat, min, max );
+	matchWCMat2Qimage( mat );
+}

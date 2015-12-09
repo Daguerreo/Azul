@@ -205,7 +205,14 @@ void ImageProcessor::gaussianFilter(cv::Mat &img, const int &kernelRadius)
 */
 void ImageProcessor::cannyFilter(cv::Mat &img, const double &lower, const double &upper)
 {
-	cv::Canny(img, img, lower, upper);
+	if( img.channels() > 1 )
+	{
+		cv::cvtColor( img, img, CV_BGR2GRAY );
+		cv::Canny(img, img, lower, upper);
+		cv::cvtColor( img, img, CV_GRAY2BGR );
+	}
+	else
+		cv::Canny(img, img, lower, upper);
 }
 
 /*

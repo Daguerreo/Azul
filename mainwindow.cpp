@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	connect( this,				SIGNAL( sigOpenSmoothingDialog() ),
 			 mSmoothingDialog,	SLOT( openDialog() ) );
 
+	mCannyDialog = new CannyFilterDialog(this, mController);
+	connect( this,				SIGNAL( sigOpenCannyDialog() ),
+			 mCannyDialog,	SLOT( openDialog() ) );
 }
 
 MainWindow::~MainWindow()
@@ -262,7 +265,7 @@ void MainWindow::on_action_Contrast_Brightness_triggered()
 void MainWindow::on_action_Grayscale_triggered()
 {
 	mGrayscaleDialog->show();
-	emit( sigOpenGrayscaleDialog() );
+	emit sigOpenGrayscaleDialog();
 }
 
 
@@ -279,6 +282,12 @@ void MainWindow::on_action_Smoothing_triggered()
 
 void MainWindow::on_action_Morphology_triggered()
 {
+}
+
+void MainWindow::on_action_Canny_triggered()
+{
+	mCannyDialog->show();
+	emit sigOpenCannyDialog();
 }
 
 /*

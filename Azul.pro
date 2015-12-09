@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     gui/dialog/GrayscaleFilterDialog.cpp \
     gui/dialog/PixelInfoDialog.cpp \
     Controller.cpp \
-    gui/dialog/SmoothingFilterDialog.cpp
+    gui/dialog/SmoothingFilterDialog.cpp \
+    gui/dialog/CannyFilterDialog.cpp
 
 
 HEADERS  += \
@@ -61,7 +62,8 @@ HEADERS  += \
     ui_mainwindow.h \
     gui/dialog/PixelInfoDialog.h \
     Controller.h \
-    gui/dialog/SmoothingFilterDialog.h
+    gui/dialog/SmoothingFilterDialog.h \
+    gui/dialog/CannyFilterDialog.h
 
 FORMS    += \
     mainwindow.ui \
