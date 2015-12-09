@@ -39,6 +39,9 @@ SmoothingFilterDialog::SmoothingFilterDialog(QWidget* parent, Controller* contro
 SmoothingFilterDialog::~SmoothingFilterDialog()
 {
 	delete mAlgoRadio;
+	delete mKernelBox;
+	delete labelKernel;
+	delete leditKernel;
 }
 
 void SmoothingFilterDialog::setOptions()
