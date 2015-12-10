@@ -28,7 +28,7 @@ public:
 	static void meanFilter(cv::Mat& img, const int& kernelRadius);
 	static void medianFilter(cv::Mat& img, const int& kernelRadius);
 	static void gaussianFilter(cv::Mat& img, const int& kernelRadius);
-	static void cannyFilter(cv::Mat& img, const double &lower, const double &upper);
+	static void cannyFilter(cv::Mat& imgGray, const double &lower, const double &upper);
 	static void cannyAutoFilter(cv::Mat &img, double sigma=0.33);
 	static int medianValue(cv::Mat &img);
 	static cv::Scalar medianValues(cv::Mat &img);

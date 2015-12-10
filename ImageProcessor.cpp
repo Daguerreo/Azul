@@ -1,5 +1,5 @@
 #include "ImageProcessor.h"
-
+#include <QDebug>
 
 int ImageProcessor::minRGB(const int &r, const int &g, const int &b)
 {
@@ -203,16 +203,16 @@ void ImageProcessor::gaussianFilter(cv::Mat &img, const int &kernelRadius)
 /*
  * Canny recommended a upper:lower ratio between 2:1 and 3:1.
 */
-void ImageProcessor::cannyFilter(cv::Mat &img, const double &lower, const double &upper)
+void ImageProcessor::cannyFilter(cv::Mat &imgGray, const double &lower, const double &upper)
 {
-	if( img.channels() > 1 )
+	if( imgGray.channels() > 1 )
 	{
-		cv::cvtColor( img, img, CV_BGR2GRAY );
-		cv::Canny(img, img, lower, upper);
-		cv::cvtColor( img, img, CV_GRAY2BGR );
+		cv::cvtColor( imgGray, imgGray, CV_BGR2GRAY );
+		cv::Canny(imgGray, imgGray, lower, upper);
+		cv::cvtColor( imgGray, imgGray, CV_GRAY2BGR );
 	}
 	else
-		cv::Canny(img, img, lower, upper);
+		cv::Canny(imgGray, imgGray, lower, upper);
 }
 
 /*

@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include <QDebug>
 
 Controller::Controller(QObject *parent): QObject(parent)
 {
@@ -157,7 +158,9 @@ void Controller::gaussianFilter(const int &kernelRadius)
 void Controller::cannyFilter(const int& min, const int& max)
 {
 	createWorkingCopy();
-	cv::Mat mat = mWCImage.getMat();
+	cv::Mat mat;
+	mWCImage.getMat().copyTo( mat );
 	ImageProcessor::cannyFilter( mat, min, max );
+	mWCImage.setMat(mat);
 	matchWCMat2Qimage( mat );
 }
