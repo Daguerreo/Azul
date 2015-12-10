@@ -17,14 +17,14 @@ CannyFilterDialog::CannyFilterDialog(QWidget *parent, Controller *controller) : 
 	labelLowThresh->setAlignment(Qt::AlignRight);
 	leditLow = new QLineEdit( "50", threshBox );
 	leditLow->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-	leditLow->setMaximumSize( 30, 90 );
+	leditLow->setMaximumSize( 40, 90 );
 
 	labelHighThresh = new QLabel( "High", threshBox );
 	labelHighThresh->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
 	labelHighThresh->setAlignment(Qt::AlignRight);
 	leditHigh = new QLineEdit( "150", threshBox );
 	leditHigh->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-	leditHigh->setMaximumSize( 30, 90 );
+	leditHigh->setMaximumSize( 40, 90 );
 
 	grid->addWidget(labelLowThresh,0,0);
 	grid->addWidget(leditLow,0,1);
@@ -60,5 +60,4 @@ void CannyFilterDialog::processImage()
 
 	QImage image = mController->requestWCQImage();
 	displayImage( image );
-	qDebug() << mController->requestWCMatImage().channels();
 }
