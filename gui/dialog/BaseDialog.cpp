@@ -127,5 +127,5 @@ void BaseDialog::buttonCancelClicked()
 }
 void BaseDialog::buttonApplyClicked()
 {
-	emit( sigApplyClicked() );
+	emit sigApplyClicked();
 }
