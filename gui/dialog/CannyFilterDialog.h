@@ -2,10 +2,8 @@
 #define CANNYFILTER_H
 
 #include <QGroupBox>
-#include <QLabel>
-#include <QLineEdit>
-
 #include <BaseDialog.h>
+#include <EntryGroupBox.h>
 
 class CannyFilterDialog : public BaseDialog
 {
@@ -22,11 +20,7 @@ protected slots:
 	void processImage();
 
 private:
-	QGroupBox* threshBox;
-	QLabel* labelLowThresh;
-	QLabel* labelHighThresh;
-	QLineEdit* leditLow;
-	QLineEdit* leditHigh;
+	EntryGroupBox* mThreshBox;
 };
 
 #endif // CANNYFILTER_H
