@@ -33,10 +33,11 @@ void RadioButtonGroupBox::placeRadioButtons(const int &index, const int &row, co
 		return;
 	}
 
-	mGrid->addWidget( mRadioButtons.at(index), row, col );
-
 	if( text != "")
 		mRadioButtons.at(index)->setText( text );
+
+	mGrid->addWidget( mRadioButtons.at(index), row, col );
+
 }
 
 int RadioButtonGroupBox::checkedRadio()
