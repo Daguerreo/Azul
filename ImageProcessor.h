@@ -3,6 +3,7 @@
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 /*
  * TODO
@@ -29,9 +30,14 @@ public:
 	static void medianFilter(cv::Mat& img, const int& kernelRadius);
 	static void gaussianFilter(cv::Mat& img, const int& kernelRadius);
 	static void cannyFilter(cv::Mat& imgGray, const double &lower, const double &upper);
-	static void cannyAutoFilter(cv::Mat &img, double sigma=0.33);
+	static void cannyAutoFilter(cv::Mat &img, const double &sigma=0.33);
 	static int medianValue(cv::Mat &img);
 	static cv::Scalar medianValues(cv::Mat &img);
+	static void dilate(cv::Mat &img, const int &radiusSize, const int &shape, const int &iterations);
+	static void erode(cv::Mat &img, const int &radiusSize, const int &shape, const int &iterations);
+	static void close(cv::Mat &img, const int &radiusSize, const int &shape);
+	static void open(cv::Mat &img, const int &radiusSize, const int &shape);
+	static void threshold(cv::Mat &imgGray, const int &threshold, const int &threshType);
 };
 
 #endif // CONTROLLER_H

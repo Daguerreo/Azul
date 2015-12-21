@@ -202,7 +202,7 @@ void ImageProcessor::gaussianFilter(cv::Mat &img, const int &kernelRadius)
 
 /*
  * Canny recommended a upper:lower ratio between 2:1 and 3:1.
-*/
+ */
 void ImageProcessor::cannyFilter(cv::Mat &imgGray, const double &lower, const double &upper)
 {
 	if( imgGray.channels() > 1 )
@@ -216,18 +216,36 @@ void ImageProcessor::cannyFilter(cv::Mat &imgGray, const double &lower, const do
 }
 
 /*
- * Warning, much slower, try to avoid in videos
-*/
-void ImageProcessor::cannyAutoFilter(cv::Mat &img, double sigma)
+ * Warning, much slower, avoid in videos
+ */
+void ImageProcessor::cannyAutoFilter(cv::Mat &imgGray, const double& sigma)
 {
-	int median = medianValue(img);
-	int up = (int)((1.0 + sigma) * median);
-	int down = (int)((0, (1.0 - sigma) * median));
+	if( imgGray.channels() > 1 )
+	{
+		cv::cvtColor( imgGray, imgGray, CV_BGR2GRAY );
 
-	int lower = down > 0 ? down : 0;
-	int upper = up < 255 ? up : 255;
+		int median = medianValue(imgGray);
+		int up = (int)((1.0 + sigma) * median);
+		int down = (int)((0, (1.0 - sigma) * median));
 
-	cv::Canny(img, img, lower, upper);
+		int lower = down > 0 ? down : 0;
+		int upper = up < 255 ? up : 255;
+
+		cv::Canny(imgGray, imgGray, lower, upper);
+		cv::cvtColor( imgGray, imgGray, CV_GRAY2BGR );
+		qDebug() << "median " << median << " low " << lower << " high " << upper;
+	}
+	else
+	{
+		int median = medianValue(imgGray);
+		int up = (int)((1.0 + sigma) * median);
+		int down = (int)((0, (1.0 - sigma) * median));
+
+		int lower = down > 0 ? down : 0;
+		int upper = up < 255 ? up : 255;
+
+		cv::Canny(imgGray, imgGray, lower, upper);
+	}
 }
 
 int ImageProcessor::medianValue(cv::Mat &img)
@@ -236,8 +254,12 @@ int ImageProcessor::medianValue(cv::Mat &img)
 	float range[] = { 0, 256 };
 	const float* histRange = { range };
 	cv::Mat hist;
-	cv::calcHist(&img, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange, true, false );
-
+	cv::calcHist( &img, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange, true, false );
+	cv::normalize( hist, hist, 0, 255, cv::NORM_MINMAX, -1, cv::Mat() );
+	for(int i=0; i<256; i++)
+	{
+		qDebug() << i << " " << hist.data[i] << " ";
+	}
 	return hist.data[histSize/2];
 }
 
@@ -251,17 +273,54 @@ cv::Scalar ImageProcessor::medianValues(cv::Mat &img)
 
 	cv::split(img, bgr);
 
-	bool uniform = true; bool accumulate = false;
 	cv::Mat b_hist, g_hist, r_hist;
 
 	/// Compute the histograms:
-	cv::calcHist( &bgr[0], 1, 0, cv::Mat(), b_hist, 1, &histSize, &histRange, uniform, accumulate );
-	cv::calcHist( &bgr[1], 1, 0, cv::Mat(), g_hist, 1, &histSize, &histRange, uniform, accumulate );
-	cv::calcHist( &bgr[2], 1, 0, cv::Mat(), r_hist, 1, &histSize, &histRange, uniform, accumulate );
-
+	cv::calcHist( &bgr[0], 1, 0, cv::Mat(), b_hist, 1, &histSize, &histRange, true, false );
+	cv::calcHist( &bgr[1], 1, 0, cv::Mat(), g_hist, 1, &histSize, &histRange, true, false );
+	cv::calcHist( &bgr[2], 1, 0, cv::Mat(), r_hist, 1, &histSize, &histRange, true, false );
+	cv::normalize( bgr[0], bgr[0], 0, 255, cv::NORM_MINMAX, -1, cv::Mat() );
+	cv::normalize( bgr[1], bgr[1], 0, 255, cv::NORM_MINMAX, -1, cv::Mat() );
+	cv::normalize( bgr[2], bgr[2], 0, 255, cv::NORM_MINMAX, -1, cv::Mat() );
 	median.val[0] = b_hist.data[histSize/2];
 	median.val[1] = g_hist.data[histSize/2];
 	median.val[2] = r_hist.data[histSize/2];
 
 	return median;
+}
+
+void ImageProcessor::dilate(cv::Mat &img, const int &radiusSize, const int &shape, const int &iterations)
+{
+	cv::Mat element = cv::getStructuringElement( shape, cv::Size(2*radiusSize+1, 2*radiusSize+1), cv::Point(radiusSize, radiusSize) );
+	cv::dilate( img, img, element, cv::Point(-1,-1), iterations );
+}
+
+void ImageProcessor::erode(cv::Mat &img, const int &radiusSize, const int &shape, const int &iterations)
+{
+	cv::Mat element = cv::getStructuringElement( shape, cv::Size(2*radiusSize+1, 2*radiusSize+1), cv::Point(radiusSize, radiusSize) );
+	cv::erode( img, img, element, cv::Point(-1,-1), iterations );
+}
+
+void ImageProcessor::close(cv::Mat &img, const int &radiusSize, const int &shape)
+{
+	cv::Mat element = cv::getStructuringElement( shape, cv::Size(2*radiusSize+1, 2*radiusSize+1), cv::Point(radiusSize, radiusSize) );
+	cv::morphologyEx( img, img, cv::MORPH_CLOSE, element );
+}
+
+void ImageProcessor::open(cv::Mat &img, const int &radiusSize, const int &shape)
+{
+	cv::Mat element = cv::getStructuringElement( shape, cv::Size(2*radiusSize+1, 2*radiusSize+1), cv::Point(radiusSize, radiusSize) );
+	cv::morphologyEx( img, img, cv::MORPH_OPEN, element );
+}
+
+void ImageProcessor::threshold(cv::Mat &imgGray, const int& threshold, const int& threshType)
+{
+	if( imgGray.channels() > 1 )
+	{
+		cv::cvtColor( imgGray, imgGray, CV_BGR2GRAY );
+		cv::threshold( imgGray, imgGray, threshold, 255, threshType );
+		cv::cvtColor( imgGray, imgGray, CV_GRAY2BGR );
+	}
+	else
+		cv::threshold( imgGray, imgGray, threshold, 255, threshType );
 }

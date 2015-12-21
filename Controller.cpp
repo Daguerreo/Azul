@@ -161,6 +161,58 @@ void Controller::cannyFilter(const int& min, const int& max)
 	cv::Mat mat;
 	mWCImage.getMat().copyTo( mat );
 	ImageProcessor::cannyFilter( mat, min, max );
-	mWCImage.setMat(mat);
+	mWCImage.setMat( mat );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::cannyAutoFilter(const double& sigma)
+{
+	createWorkingCopy();
+	cv::Mat mat;
+	mWCImage.getMat().copyTo( mat );
+	ImageProcessor::cannyAutoFilter( mat, sigma );
+	mWCImage.setMat( mat );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::morphologyDilate(const int &radiusSize, const int &shape, const int &iterations)
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::dilate( mat, radiusSize, shape, iterations );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::morphologyErode(const int &radiusSize, const int &shape, const int &iterations)
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::dilate( mat, radiusSize, shape, iterations );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::morphologyOpen(const int &radiusSize, const int &shape)
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::open( mat, radiusSize, shape );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::morphologyClose(const int &radiusSize, const int &shape)
+{
+	createWorkingCopy();
+	cv::Mat mat = mWCImage.getMat();
+	ImageProcessor::close( mat, radiusSize, shape );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::binarization(const int& threshold, const int& threshType)
+{
+	createWorkingCopy();
+	cv::Mat mat;
+	mWCImage.getMat().copyTo( mat );
+	ImageProcessor::threshold(mat, threshold, threshType);
+	mWCImage.setMat( mat );
 	matchWCMat2Qimage( mat );
 }

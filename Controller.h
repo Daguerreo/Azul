@@ -39,6 +39,12 @@ public:
 	void medianFilter(const int &kernelRadius);
 	void gaussianFilter(const int &kernelRadius);
 	void cannyFilter(const int &min, const int &max);
+	void cannyAutoFilter(const double &sigma=0.33);
+	void morphologyDilate(const int &radiusSize, const int &shape, const int &iterations);
+	void morphologyErode(const int &radiusSize, const int &shape, const int &iterations);
+	void morphologyOpen(const int &radiusSize, const int &shape);
+	void morphologyClose(const int &radiusSize, const int &shape);
+	void binarization(const int &threshold, const int &threshType);
 
 private:
 	Image mImage;
