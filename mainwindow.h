@@ -13,6 +13,8 @@
 #include <PixelInfoDialog.h>
 #include <SmoothingFilterDialog.h>
 #include <CannyFilterDialog.h>
+#include <MorphologyDialog.h>
+#include <ThresholdDialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -26,10 +28,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 public slots:
 	void updateView();
 
 protected:
+	void displayImage(const QString &path);
 	void displayImage(const QImage &image);
 	void scaleView(const double &factor);
 
@@ -55,9 +59,11 @@ private slots:
 	void on_action_Sharpen_triggered();
 	void on_action_Smoothing_triggered();
 	void on_action_Morphology_triggered();
-	void on_action_About_Qt_triggered();
 	void on_action_Negative_triggered();
 	void on_action_Canny_triggered();
+	void on_action_About_Qt_triggered();
+	void on_action_Lena_triggered();
+	void on_action_Binarization_triggered();
 
 private:
 	// View
@@ -79,14 +85,18 @@ private:
 	PixelInfoDialog*		mPixelInfoDialog;
 	SmoothingFilterDialog*	mSmoothingDialog;
 	CannyFilterDialog*		mCannyDialog;
+	MorphologyDialog*		mMorphologyDialog;
+	ThresholdDialog*		mThresholdDialog;
 
 signals:
 	void sigOpenGrayscaleDialog();
 	void sigOpenContrastDialog();
 	void sigOpenNegativeDialog();
-	void sigOpenPixelInfoDialog( const QPixmap& clip, const QPointF& mousePos );
+	void sigOpenPixelInfoDialog(const QPixmap& clip, const QPointF& mousePos);
 	void sigOpenSmoothingDialog();
 	void sigOpenCannyDialog();
+	void sigOpenMorphologyDialog();
+	void sigOpenThresholdDialog();
  };
 
 #endif // MAINWINDOW_H

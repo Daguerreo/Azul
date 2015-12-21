@@ -504,6 +504,7 @@
     <addaction name="action_Sharpen"/>
     <addaction name="action_Morphology"/>
     <addaction name="action_Canny"/>
+    <addaction name="action_Binarization"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -613,6 +614,7 @@
    <addaction name="action_Save"/>
    <addaction name="action_Zoom_Out"/>
    <addaction name="action_Zoom_In"/>
+   <addaction name="action_Lena"/>
   </widget>
   <action name="action_Open">
    <property name="icon">
@@ -762,7 +764,7 @@
   </action>
   <action name="action_Morphology">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Morphology</string>
@@ -790,6 +792,26 @@
   <action name="action_Canny">
    <property name="text">
     <string>Canny</string>
+   </property>
+  </action>
+  <action name="action_Lena">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/res/icon/lena_icon.png</normaloff>:/res/icon/lena_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Lena</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+L</string>
+   </property>
+  </action>
+  <action name="action_Binarization">
+   <property name="text">
+    <string>Binarization</string>
+   </property>
+   <property name="toolTip">
+    <string>Binarization</string>
    </property>
   </action>
  </widget>

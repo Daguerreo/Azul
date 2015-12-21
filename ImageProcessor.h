@@ -38,6 +38,7 @@ public:
 	static void close(cv::Mat &img, const int &radiusSize, const int &shape);
 	static void open(cv::Mat &img, const int &radiusSize, const int &shape);
 	static void threshold(cv::Mat &imgGray, const int &threshold, const int &threshType);
+	static void adaptiveThreshold(cv::Mat &imgGray, const int &thresholdValue, const int &threshType, const int &inverted, const int &blockSize, const int &C);
 };
 
 #endif // CONTROLLER_H

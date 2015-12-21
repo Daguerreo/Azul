@@ -207,12 +207,22 @@ void Controller::morphologyClose(const int &radiusSize, const int &shape)
 	matchWCMat2Qimage( mat );
 }
 
-void Controller::binarization(const int& threshold, const int& threshType)
+void Controller::threshold(const int& thresholdValue, const int& threshType)
 {
 	createWorkingCopy();
 	cv::Mat mat;
 	mWCImage.getMat().copyTo( mat );
-	ImageProcessor::threshold(mat, threshold, threshType);
+	ImageProcessor::threshold(mat, thresholdValue, threshType);
+	mWCImage.setMat( mat );
+	matchWCMat2Qimage( mat );
+}
+
+void Controller::adaptiveThreshold(const int& thresholdValue, const int& threshType)
+{
+	createWorkingCopy();
+	cv::Mat mat;
+	mWCImage.getMat().copyTo( mat );
+	//ImageProcessor::adaptiveThreshold
 	mWCImage.setMat( mat );
 	matchWCMat2Qimage( mat );
 }

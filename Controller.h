@@ -44,8 +44,8 @@ public:
 	void morphologyErode(const int &radiusSize, const int &shape, const int &iterations);
 	void morphologyOpen(const int &radiusSize, const int &shape);
 	void morphologyClose(const int &radiusSize, const int &shape);
-	void binarization(const int &threshold, const int &threshType);
-
+	void threshold(const int &thresholdValue, const int &threshType);
+	void adaptiveThreshold(const int &thresholdValue, const int &threshType);
 private:
 	Image mImage;
 	Image mWCImage; // Working Copy

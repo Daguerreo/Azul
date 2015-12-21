@@ -324,3 +324,15 @@ void ImageProcessor::threshold(cv::Mat &imgGray, const int& threshold, const int
 	else
 		cv::threshold( imgGray, imgGray, threshold, 255, threshType );
 }
+
+void ImageProcessor::adaptiveThreshold(cv::Mat &imgGray, const int& thresholdValue, const int& threshType, const int& inverted, const int& blockSize, const int& C)
+{
+	if( imgGray.channels() > 1 )
+	{
+		cv::cvtColor( imgGray, imgGray, CV_BGR2GRAY );
+		cv::adaptiveThreshold( imgGray, imgGray, thresholdValue, threshType, inverted, blockSize, C );
+		cv::cvtColor( imgGray, imgGray, CV_GRAY2BGR );
+	}
+	else
+		cv::adaptiveThreshold( imgGray, imgGray, thresholdValue, threshType, inverted, blockSize, C );
+}

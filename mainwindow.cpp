@@ -63,6 +63,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	mCannyDialog = new CannyFilterDialog(this, mController);
 	connect( this,				SIGNAL( sigOpenCannyDialog() ),
 			 mCannyDialog,	SLOT( openDialog() ) );
+
+	mMorphologyDialog = new MorphologyDialog(this, mController);
+	connect( this,				SIGNAL( sigOpenMorphologyDialog() ),
+			 mMorphologyDialog,	SLOT( openDialog() ) );
+
+	mThresholdDialog = new ThresholdDialog(this, mController);
+	connect( this,				SIGNAL( sigOpenThresholdDialog() ),
+			 mThresholdDialog,	SLOT( openDialog() ) );
 }
 
 MainWindow::~MainWindow()
@@ -75,6 +83,7 @@ MainWindow::~MainWindow()
 	delete mNegativeDialog;
 	delete mPixelInfoDialog;
 	delete mSmoothingDialog;
+	delete mMorphologyDialog;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -268,7 +277,11 @@ void MainWindow::on_action_Grayscale_triggered()
 	emit sigOpenGrayscaleDialog();
 }
 
-
+void MainWindow::on_action_Negative_triggered()
+{
+	mNegativeDialog->show();
+	emit( sigOpenNegativeDialog() );
+}
 
 void MainWindow::on_action_Sharpen_triggered()
 {
@@ -282,6 +295,8 @@ void MainWindow::on_action_Smoothing_triggered()
 
 void MainWindow::on_action_Morphology_triggered()
 {
+	mMorphologyDialog->show();
+	emit sigOpenMorphologyDialog();
 }
 
 void MainWindow::on_action_Canny_triggered()
@@ -289,6 +304,13 @@ void MainWindow::on_action_Canny_triggered()
 	mCannyDialog->show();
 	emit sigOpenCannyDialog();
 }
+
+void MainWindow::on_action_Binarization_triggered()
+{
+	mThresholdDialog->show();
+	emit sigOpenThresholdDialog();
+}
+
 
 /*
  * Help
@@ -299,8 +321,16 @@ void MainWindow::on_action_About_Qt_triggered()
 	QMessageBox::aboutQt(this);
 }
 
-void MainWindow::on_action_Negative_triggered()
+
+void MainWindow::on_action_Lena_triggered()
 {
-	mNegativeDialog->show();
-	emit( sigOpenNegativeDialog() );
+	QString path("C:/Users/Daguerreo/Documents/workaspace/git/Azul.git/trunk/res/lena.jpg");
+
+	bool success = mController->createImage( path );
+
+	if( !success )
+		return;
+
+	QImage image = mController->requestQImage();
+	displayImage( image );
 }

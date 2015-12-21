@@ -40,7 +40,11 @@ SOURCES += main.cpp\
     gui/dialog/PixelInfoDialog.cpp \
     Controller.cpp \
     gui/dialog/SmoothingFilterDialog.cpp \
-    gui/dialog/CannyFilterDialog.cpp
+    gui/dialog/CannyFilterDialog.cpp \
+    gui/widget/EntryGroupBox.cpp \
+    gui/dialog/MorphologyDialog.cpp \
+    gui/dialog/Dialog.cpp \
+    gui/dialog/ThresholdDialog.cpp
 
 
 HEADERS  += \
@@ -63,7 +67,11 @@ HEADERS  += \
     gui/dialog/PixelInfoDialog.h \
     Controller.h \
     gui/dialog/SmoothingFilterDialog.h \
-    gui/dialog/CannyFilterDialog.h
+    gui/dialog/CannyFilterDialog.h \
+    gui/widget/EntryGroupBox.h \
+    gui/dialog/MorphologyDialog.h \
+    gui/dialog/Dialog.h \
+    gui/dialog/ThresholdDialog.h
 
 FORMS    += \
     mainwindow.ui \
@@ -109,4 +117,5 @@ win32{
 }
 
 RESOURCES += \
-    icon.qrc
+    icon.qrc \
+    image.qrc
